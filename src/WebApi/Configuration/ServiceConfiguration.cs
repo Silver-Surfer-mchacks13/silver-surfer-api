@@ -14,6 +14,8 @@ using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.ChatCompletion;
 using Resend;
 using WebApi.Configuration.Options;
 using WebApi.Data;
@@ -380,6 +382,39 @@ public static class ServiceConfiguration
     {
         services.AddHttpClient();
         services.AddScoped<Services.Gemini.GeminiService>();
+    }
+
+    /// <summary>
+    /// Configures Semantic Kernel with Vertex AI Gemini connector for agent orchestration.
+    /// </summary>
+    /// <param name="services">The service collection to configure.</param>
+    /// <param name="configuration">The configuration instance to read Gemini settings from.</param>
+    public static void ConfigureSemanticKernel(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        var geminiOptions = configuration.GetSection(Options.GeminiOptions.SectionName).Get<Options.GeminiOptions>();
+        if (geminiOptions == null)
+        {
+            throw new InvalidOperationException("Gemini configuration is required for Semantic Kernel");
+        }
+
+        // Register custom Vertex AI chat completion service
+        services.AddScoped<Services.Agent.VertexAIChatCompletionService>();
+        
+        // Register Kernel as scoped (one per request)
+        services.AddScoped<Kernel>(sp =>
+        {
+            var kernelBuilder = Kernel.CreateBuilder();
+            
+            // Add our custom Vertex AI chat completion service
+            // This wraps the existing Vertex AI integration (similar to GeminiService)
+            // and implements IChatCompletionService for Semantic Kernel
+            var chatCompletionService = sp.GetRequiredService<Services.Agent.VertexAIChatCompletionService>();
+            kernelBuilder.Services.AddSingleton<IChatCompletionService>(chatCompletionService);
+            
+            return kernelBuilder.Build();
+        });
     }
     
     /// <summary>

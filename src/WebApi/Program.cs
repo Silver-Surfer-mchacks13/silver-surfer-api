@@ -36,6 +36,8 @@ builder.Services.ConfigureResponseCaching(builder.Environment);
 builder.Services.ConfigureOpenTelemetry(builder.Configuration, builder.Logging, builder.Environment);
 builder.Services.ConfigureAuthServices(builder.Configuration);
 builder.Services.ConfigureGemini(builder.Configuration);
+builder.Services.ConfigureSemanticKernel(builder.Configuration);
+builder.Services.AddScoped<WebApi.Services.Agent.AgentService>();
 
 var app = builder.Build();
 

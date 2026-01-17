@@ -58,6 +58,12 @@
     
     <!-- Vertex AI / Gemini -->
     <PackageReference Include="Google.Cloud.AIPlatform.V1" Version="3.20.0" />
+    
+    <!-- Semantic Kernel -->
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.0.1" />
+    <!-- 
+    <PackageReference Include="Microsoft.SemanticKernel.Connectors.Google" Version="1.0.1-alpha" />
+    -->
   </ItemGroup>
 
   <ItemGroup>

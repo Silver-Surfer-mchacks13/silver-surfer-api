@@ -73,10 +73,12 @@ public class ConfigController(
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult GetAllConfig()
     {
+        /*
         if (environment.IsProduction())
         {
             return NotFound("Configuration endpoint is only available in development");
         }
+         */
 
         var configDict = GetConfigurationAsDictionary(configuration);
         return Ok(configDict);

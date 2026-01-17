@@ -11,6 +11,9 @@ public class AppDbContext(
     public DbSet<User> Users { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<PasswordResetRequest> PasswordResetRequests { get; set; }
+    public DbSet<TaskSession> TaskSessions { get; set; }
+    public DbSet<AgentAction> AgentActions { get; set; }
+    public DbSet<SitePattern> SitePatterns { get; set; }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
@@ -122,6 +125,63 @@ public class AppDbContext(
                 .WithMany(e => e.PasswordResetRequests)
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+        });
+        
+        modelBuilder.Entity<TaskSession>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.HasIndex(e => e.UserId);
+            entity.HasIndex(e => e.Status);
+            entity.HasIndex(e => e.CreatedAt);
+            
+            entity.Property(e => e.Goal).IsRequired().HasMaxLength(1000);
+            entity.Property(e => e.Status).IsRequired().HasConversion<string>().HasMaxLength(20);
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            entity.Property(e => e.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            
+            // Optional relationship to User (nullable FK for future authorization)
+            entity.HasOne(e => e.User)
+                .WithMany()
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.SetNull); // Set null if user is deleted
+            
+            entity.HasMany(e => e.Actions)
+                .WithOne(e => e.Session)
+                .HasForeignKey(e => e.SessionId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+        
+        modelBuilder.Entity<AgentAction>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.HasIndex(e => e.SessionId);
+            entity.HasIndex(e => e.ActionType);
+            entity.HasIndex(e => e.CreatedAt);
+            
+            entity.Property(e => e.ActionType).IsRequired().HasMaxLength(50);
+            entity.Property(e => e.Target).HasMaxLength(500);
+            entity.Property(e => e.Value).HasMaxLength(2000);
+            entity.Property(e => e.Reasoning).IsRequired().HasMaxLength(5000);
+            entity.Property(e => e.ErrorMessage).HasMaxLength(1000);
+            entity.Property(e => e.PageUrl).IsRequired().HasMaxLength(2000);
+            entity.Property(e => e.PageHtml).HasMaxLength(50000); // Truncated HTML
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            
+            entity.HasOne(e => e.Session)
+                .WithMany(e => e.Actions)
+                .HasForeignKey(e => e.SessionId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+        
+        modelBuilder.Entity<SitePattern>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.HasIndex(e => e.Domain).IsUnique();
+            
+            entity.Property(e => e.Domain).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.PatternJson).IsRequired();
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            entity.Property(e => e.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
         });
     }
 }
