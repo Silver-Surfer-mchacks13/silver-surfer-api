@@ -25,6 +25,7 @@ gcloud projects add-iam-policy-binding $ProjectId --member="serviceAccount:$Serv
 gcloud projects add-iam-policy-binding $ProjectId --member="serviceAccount:$ServiceAccountEmail" --role="roles/storage.admin"
 gcloud projects add-iam-policy-binding $ProjectId --member="serviceAccount:$ServiceAccountEmail" --role="roles/iam.serviceAccountUser"
 gcloud projects add-iam-policy-binding $ProjectId --member="serviceAccount:$ServiceAccountEmail" --role="roles/iam.serviceAccountAdmin"
+gcloud projects add-iam-policy-binding $ProjectId --member="serviceAccount:$ServiceAccountEmail" --role="roles/resourcemanager.projectIamAdmin"
 gcloud projects add-iam-policy-binding $ProjectId --member="serviceAccount:$ServiceAccountEmail" --role="roles/storage.objectAdmin"
 
 # create key and print stuff

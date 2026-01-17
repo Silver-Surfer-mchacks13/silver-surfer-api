@@ -62,7 +62,6 @@ public class ConfigController(
         return Ok(response);
     }
 
-#if DEBUG
     /// <summary>
     /// Returns all configuration values as JSON (development only)
     /// </summary>
@@ -82,7 +81,6 @@ public class ConfigController(
         var configDict = GetConfigurationAsDictionary(configuration);
         return Ok(configDict);
     }
-#endif
 
     private static Dictionary<string, object?> GetConfigurationAsDictionary(IConfiguration configuration)
     {

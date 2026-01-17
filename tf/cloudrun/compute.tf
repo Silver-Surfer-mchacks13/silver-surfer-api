@@ -8,9 +8,9 @@ resource "google_service_account" "webapi_sa" {
   description  = "Service account for Cloud Run WebApi service with Vertex AI access"
 }
 
-# Grant Vertex AI User role
+# Grant Vertex AI User role on the Gemini project (or main project if same)
 resource "google_project_iam_member" "webapi_vertex_ai_user" {
-  project = var.gcp_project_id
+  project = var.gemini_project_id != "" ? var.gemini_project_id : var.gcp_project_id
   role    = "roles/aiplatform.user"
   member  = "serviceAccount:${google_service_account.webapi_sa.email}"
 }
