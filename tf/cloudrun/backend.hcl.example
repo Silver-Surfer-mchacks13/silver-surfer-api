@@ -1,0 +1,7 @@
+# Example backend configuration for GCS
+# Copy this to backend.hcl and update with your bucket name
+# Then use: terraform init -backend-config=backend.hcl
+
+bucket = "your-project-name-terraform-state"
+prefix = "cloudrun/state"
+

@@ -1,0 +1,2558 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="cec1aed1-2cd9-4c23-a85f-238ebd87a428" name="bryan@BRY 2026-01-05 12:57:22" runUser="BRY\bryan" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-01-05T12:57:22.6779407-05:00" queuing="2026-01-05T12:57:22.6779411-05:00" start="2026-01-05T12:57:19.3325640-05:00" finish="2026-01-05T12:57:48.4631622-05:00" />
+  <TestSettings name="default" id="762d116f-6c87-406f-a4d5-22da7005e1d6">
+    <Deployment runDeploymentRoot="bryan_BRY_2026-01-05_12_57_22" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="2f735663-6edc-491c-8a6a-9edfe433c5e7" testId="36d22c23-6c28-51fc-9cf2-17f2d002872d" testName="UpdateTag_OtherUsersTag_ReturnsNotFound" computerName="BRY" duration="00:00:00.5314780" startTime="2026-01-05T12:57:36.6905055-05:00" endTime="2026-01-05T12:57:37.2219835-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2f735663-6edc-491c-8a6a-9edfe433c5e7">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="099025f2-6289-4b96-816e-106af61841fe" testId="a5c235ae-f617-7a06-ab5a-030c9355fde8" testName="CreateTodo_WithEmptyTitle_ReturnsBadRequest" computerName="BRY" duration="00:00:00.5293490" startTime="2026-01-05T12:57:38.2893375-05:00" endTime="2026-01-05T12:57:38.8186856-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="099025f2-6289-4b96-816e-106af61841fe">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+        <ErrorInfo>
+          <Message>Expected response.StatusCode to be HttpStatusCode.BadRequest {value: 400}, but found HttpStatusCode.Created {value: 201}.</Message>
+          <StackTrace>   at FluentAssertions.Execution.LateBoundTestFramework.Throw(String message)&#xD;
+   at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(Func`1 getFailureReason)&#xD;
+   at FluentAssertions.Primitives.EnumAssertions`2.Be(TEnum expected, String because, Object[] becauseArgs)&#xD;
+   at WebApi.Tests.Controllers.TodosControllerTests.CreateTodo_WithEmptyTitle_ReturnsBadRequest() in C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\Controllers\TodosControllerTests.cs:line 217&#xD;
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.BlockUntilCompleted()&#xD;
+   at NUnit.Framework.Internal.MessagePumpStrategy.NoMessagePumpStrategy.WaitForCompletion(AwaitAdapter awaiter)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await[TResult](TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()&#xD;
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)&#xD;
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="5930fd51-75b5-4ef1-b336-c118d6dbb161" testId="cc1b18ea-a8b8-be6b-ac87-901ec9f25322" testName="GetAllTodos_FilterByPriority_ReturnsOnlyMatchingPriority" computerName="BRY" duration="00:00:00.5359550" startTime="2026-01-05T12:57:42.5624419-05:00" endTime="2026-01-05T12:57:43.0983955-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5930fd51-75b5-4ef1-b336-c118d6dbb161">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="30ce2341-d661-4070-9769-ddc138f8334e" testId="f1f92d68-7423-2cde-131d-e6213eb5b2a2" testName="UpdateTodo_NonExistentId_ReturnsNotFound" computerName="BRY" duration="00:00:00.5305450" startTime="2026-01-05T12:57:46.8097136-05:00" endTime="2026-01-05T12:57:47.3402579-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="30ce2341-d661-4070-9769-ddc138f8334e">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2aeb9cde-a517-44a9-9360-efa50e3339e2" testId="6d326e60-2177-25f6-b4f4-4c04bbc07cf8" testName="GetAllTodos_FilterByPending_ReturnsOnlyPendingTodos" computerName="BRY" duration="00:00:00.5278590" startTime="2026-01-05T12:57:42.0345515-05:00" endTime="2026-01-05T12:57:42.5624095-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2aeb9cde-a517-44a9-9360-efa50e3339e2">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+        <ErrorInfo>
+          <Message>Expected result to contain only items matching (t.IsCompleted == False), but {&#xD;
+    WebApi.DTOs.Todos.TodoItemDto&#xD;
+    {&#xD;
+        CreatedAt = &lt;2026-01-05 17:57:42.5523457&gt;,&#xD;
+        Description = "Second test todo",&#xD;
+        DueDate = &lt;2026-01-07 17:57:42.5523456&gt;,&#xD;
+        Id = {d9cc2d98-3ecd-424b-830a-06d9000a5823},&#xD;
+        IsCompleted = True,&#xD;
+        Priority = Priority.Medium {value: 1},&#xD;
+        Tags = {empty},&#xD;
+        Title = "Test Todo 2",&#xD;
+        UpdatedAt = &lt;2026-01-05 17:57:42.5523459&gt;&#xD;
+    }&#xD;
+} do(es) not match.</Message>
+          <StackTrace>   at FluentAssertions.Execution.LateBoundTestFramework.Throw(String message)&#xD;
+   at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(Func`1 getFailureReason)&#xD;
+   at FluentAssertions.Execution.GivenSelector`1.FailWith(String message, Object[] args)&#xD;
+   at FluentAssertions.Execution.GivenSelector`1.FailWith(String message, Func`2[] args)&#xD;
+   at FluentAssertions.Collections.GenericCollectionAssertions`3.&lt;&gt;c__DisplayClass86_0.&lt;OnlyContain&gt;b__0(AssertionChain chain)&#xD;
+   at FluentAssertions.Execution.AssertionChain.WithExpectation(String message, Action`1 chain, Object[] args)&#xD;
+   at FluentAssertions.Execution.AssertionChain.WithExpectation(String message, Object arg1, Action`1 chain)&#xD;
+   at FluentAssertions.Collections.GenericCollectionAssertions`3.OnlyContain(Expression`1 predicate, String because, Object[] becauseArgs)&#xD;
+   at WebApi.Tests.Controllers.TodosControllerTests.GetAllTodos_FilterByPending_ReturnsOnlyPendingTodos() in C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\Controllers\TodosControllerTests.cs:line 69&#xD;
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.BlockUntilCompleted()&#xD;
+   at NUnit.Framework.Internal.MessagePumpStrategy.NoMessagePumpStrategy.WaitForCompletion(AwaitAdapter awaiter)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await[TResult](TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()&#xD;
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)&#xD;
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0c1e72a3-6fda-464f-adc4-1a99ae9b2378" testId="ade7ea0c-667f-727a-f908-ccdad3c03d59" testName="DeleteTodo_NonExistentId_ReturnsNotFound" computerName="BRY" duration="00:00:00.5313880" startTime="2026-01-05T12:57:39.8812514-05:00" endTime="2026-01-05T12:57:40.4126388-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0c1e72a3-6fda-464f-adc4-1a99ae9b2378">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="90991e32-00ec-490d-847d-bfdd87d3f738" testId="0ba0fd0c-171a-c258-f69f-053407736c76" testName="Register_WithDuplicateUsername_ReturnsBadRequest" computerName="BRY" duration="00:00:00.5293880" startTime="2026-01-05T12:57:26.2189935-05:00" endTime="2026-01-05T12:57:26.7483810-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="90991e32-00ec-490d-847d-bfdd87d3f738">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="523d8205-acdc-48c2-ae0c-0281604c15af" testId="b1181f86-3a9b-ad1f-603c-c9092a5d4333" testName="GetAllTodos_FilterByTag_ReturnsOnlyTodosWithTag" computerName="BRY" duration="00:00:00.5350279" startTime="2026-01-05T12:57:43.0984378-05:00" endTime="2026-01-05T12:57:43.6334653-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="523d8205-acdc-48c2-ae0c-0281604c15af">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+        <ErrorInfo>
+          <Message>Expected result to contain only items matching t.Tags.Any(tag =&gt; (tag.Id == value(WebApi.Tests.Controllers.TodosControllerTests+&lt;&gt;c__DisplayClass9_0).workTag.Id)), but {&#xD;
+    WebApi.DTOs.Todos.TodoItemDto&#xD;
+    {&#xD;
+        CreatedAt = &lt;2026-01-05 17:57:43.6195055&gt;,&#xD;
+        Description = "Second test todo",&#xD;
+        DueDate = &lt;2026-01-07 17:57:43.6195053&gt;,&#xD;
+        Id = {367ca914-59d2-4676-9fee-ebf7c75cd41f},&#xD;
+        IsCompleted = True,&#xD;
+        Priority = Priority.Medium {value: 1},&#xD;
+        Tags = {empty},&#xD;
+        Title = "Test Todo 2",&#xD;
+        UpdatedAt = &lt;2026-01-05 17:57:43.6195055&gt;&#xD;
+    }&#xD;
+} do(es) not match.</Message>
+          <StackTrace>   at FluentAssertions.Execution.LateBoundTestFramework.Throw(String message)&#xD;
+   at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(Func`1 getFailureReason)&#xD;
+   at FluentAssertions.Execution.GivenSelector`1.FailWith(String message, Object[] args)&#xD;
+   at FluentAssertions.Execution.GivenSelector`1.FailWith(String message, Func`2[] args)&#xD;
+   at FluentAssertions.Collections.GenericCollectionAssertions`3.&lt;&gt;c__DisplayClass86_0.&lt;OnlyContain&gt;b__0(AssertionChain chain)&#xD;
+   at FluentAssertions.Execution.AssertionChain.WithExpectation(String message, Action`1 chain, Object[] args)&#xD;
+   at FluentAssertions.Execution.AssertionChain.WithExpectation(String message, Object arg1, Action`1 chain)&#xD;
+   at FluentAssertions.Collections.GenericCollectionAssertions`3.OnlyContain(Expression`1 predicate, String because, Object[] becauseArgs)&#xD;
+   at WebApi.Tests.Controllers.TodosControllerTests.GetAllTodos_FilterByTag_ReturnsOnlyTodosWithTag() in C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\Controllers\TodosControllerTests.cs:line 101&#xD;
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.BlockUntilCompleted()&#xD;
+   at NUnit.Framework.Internal.MessagePumpStrategy.NoMessagePumpStrategy.WaitForCompletion(AwaitAdapter awaiter)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await[TResult](TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()&#xD;
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)&#xD;
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a399c8ff-07e1-4d22-86f7-d48c3c370514" testId="8026cd4f-21f0-8e0d-d122-e9e95ad0e7eb" testName="UpdateTodo_WithValidData_ReturnsOk" computerName="BRY" duration="00:00:00.5248560" startTime="2026-01-05T12:57:47.8691357-05:00" endTime="2026-01-05T12:57:48.3939917-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a399c8ff-07e1-4d22-86f7-d48c3c370514">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7d96e1f3-60f8-47e2-ae44-8fe57d2ac19c" testId="170f085b-4d14-9381-619c-f8380f156725" testName="GetTodoById_WithValidId_ReturnsOk" computerName="BRY" duration="00:00:00.5314580" startTime="2026-01-05T12:57:45.2232354-05:00" endTime="2026-01-05T12:57:45.7546933-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7d96e1f3-60f8-47e2-ae44-8fe57d2ac19c">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="aa767826-a1d8-4aee-ad32-825118a26d0f" testId="f72370cc-3997-dc09-715a-e461a6953936" testName="DeleteTodo_WithValidId_ReturnsNoContent" computerName="BRY" duration="00:00:00.5398889" startTime="2026-01-05T12:57:40.9465456-05:00" endTime="2026-01-05T12:57:41.4864338-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="aa767826-a1d8-4aee-ad32-825118a26d0f">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="8b50820a-a2a2-4fd9-890e-493dd1a1bebc" testId="39306b4a-aee3-4fa0-60ef-33aaa0db0887" testName="DeleteTag_NonExistentId_ReturnsNotFound" computerName="BRY" duration="00:00:00.5290080" startTime="2026-01-05T12:57:31.2697078-05:00" endTime="2026-01-05T12:57:31.7987158-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8b50820a-a2a2-4fd9-890e-493dd1a1bebc">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c0b69388-31f3-4fa8-a19e-7e0b58783953" testId="0c457f24-aff6-1ea7-f71f-10b95ef696c5" testName="GetAllTags_ReturnsOkWithTags" computerName="BRY" duration="00:00:00.5478790" startTime="2026-01-05T12:57:32.8960510-05:00" endTime="2026-01-05T12:57:33.4439303-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c0b69388-31f3-4fa8-a19e-7e0b58783953">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="923df591-f9eb-4f9b-9e00-66cef0e0f430" testId="a32015a8-072f-6736-d293-65926fef1708" testName="UpdateTag_WithDuplicateName_ReturnsBadRequest" computerName="BRY" duration="00:00:00.5323830" startTime="2026-01-05T12:57:37.2220183-05:00" endTime="2026-01-05T12:57:37.7544006-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="923df591-f9eb-4f9b-9e00-66cef0e0f430">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="63e8bcdf-c81b-4690-b191-c6d1d76993ef" testId="f676405e-d98b-49f3-fdfb-241bade7d01a" testName="GetCurrentUser_WithValidToken_ReturnsUser" computerName="BRY" duration="00:00:00.9460350" startTime="2026-01-05T12:57:21.7345253-05:00" endTime="2026-01-05T12:57:22.6805594-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="63e8bcdf-c81b-4690-b191-c6d1d76993ef">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+     Warning:&#xD;
+     The component "Fluent Assertions" is governed by the rules defined in the Xceed License Agreement and&#xD;
+     the Xceed Fluent Assertions Community License. You may use Fluent Assertions free of charge for&#xD;
+     non-commercial use only. An active subscription is required to use Fluent Assertions for commercial use.&#xD;
+&#xD;
+     Please contact Xceed Sales mailto:sales@xceed.com to acquire a subscription at a very low cost.&#xD;
+&#xD;
+     A paid commercial license supports the development and continued increasing support of&#xD;
+     Fluent Assertions users under both commercial and community licenses. Help us&#xD;
+     keep Fluent Assertions at the forefront of unit testing.&#xD;
+&#xD;
+     For more information, visit https://xceed.com/products/unit-testing/fluent-assertions/&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="89c39ce5-3ce3-4216-9084-94b3510a61d1" testId="0f17dea0-aee7-4e96-ae32-357e111a4523" testName="TagTodoAssociation_DeleteTag_TodosNoLongerHaveTag" computerName="BRY" duration="00:00:00.5559170" startTime="2026-01-05T12:57:35.6065892-05:00" endTime="2026-01-05T12:57:36.1625058-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="89c39ce5-3ce3-4216-9084-94b3510a61d1">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0e3a5f72-2531-495e-b6d2-5478d438b486" testId="08d7a87f-8aa5-c7a8-e5ee-faec78f8215e" testName="GetAllTodos_ReturnsOkWithTodos" computerName="BRY" duration="00:00:00.5287840" startTime="2026-01-05T12:57:43.6335140-05:00" endTime="2026-01-05T12:57:44.1622975-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0e3a5f72-2531-495e-b6d2-5478d438b486">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="85aa74d0-d57e-4254-b39d-80e1e69a1c47" testId="e3202dd6-ab0d-72c8-5210-dd70bd931c3f" testName="CreateTodo_WithTags_ReturnsCreatedWithTags" computerName="BRY" duration="00:00:00.5303500" startTime="2026-01-05T12:57:38.8187414-05:00" endTime="2026-01-05T12:57:39.3490907-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="85aa74d0-d57e-4254-b39d-80e1e69a1c47">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b14c1ebf-cfbe-411d-840d-571c719c6d4c" testId="796bb581-0eb5-3223-6923-a782589060e7" testName="GetTagById_WithNonExistentId_ReturnsNotFound" computerName="BRY" duration="00:00:00.5292040" startTime="2026-01-05T12:57:33.9691020-05:00" endTime="2026-01-05T12:57:34.4983054-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b14c1ebf-cfbe-411d-840d-571c719c6d4c">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9e2d97b5-4d9f-47bb-85cc-7718cd9027ac" testId="62f22fd2-37ec-2151-5b98-079fd6f29cc8" testName="DeleteTag_WithValidId_ReturnsNoContent" computerName="BRY" duration="00:00:00.5611260" startTime="2026-01-05T12:57:32.3348924-05:00" endTime="2026-01-05T12:57:32.8960179-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9e2d97b5-4d9f-47bb-85cc-7718cd9027ac">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="95bacfef-fbb0-4e75-b483-fa59aa7893ba" testId="ad6a8681-87a3-4f90-233c-3c66392aea02" testName="CreateTag_WithValidData_ReturnsCreated" computerName="BRY" duration="00:00:00.5474970" startTime="2026-01-05T12:57:30.7221767-05:00" endTime="2026-01-05T12:57:31.2696731-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="95bacfef-fbb0-4e75-b483-fa59aa7893ba">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b612122e-077b-4d7d-bf79-11064a75cbab" testId="070eab8d-bda3-e750-9670-5aae1a01453c" testName="GetCurrentUser_WithInvalidToken_ReturnsUnauthorized" computerName="BRY" duration="00:00:01.4314220" startTime="2026-01-05T12:57:19.7426634-05:00" endTime="2026-01-05T12:57:21.1740536-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b612122e-077b-4d7d-bf79-11064a75cbab">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ee2ef543-4cad-4f34-9fb8-5af573d7218a" testId="1e58fb82-af13-232d-d5b3-6aab89ce125a" testName="UpdateTodo_OtherUsersTodo_ReturnsNotFound" computerName="BRY" duration="00:00:00.5287860" startTime="2026-01-05T12:57:47.3402892-05:00" endTime="2026-01-05T12:57:47.8690747-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ee2ef543-4cad-4f34-9fb8-5af573d7218a">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="3ab53148-a2c2-4c1e-9bf5-272a435c6d2a" testId="3eba6c44-23de-7be8-51f9-96d97780b645" testName="Login_WithValidCredentials_ReturnsToken" computerName="BRY" duration="00:00:00.7858990" startTime="2026-01-05T12:57:24.8971335-05:00" endTime="2026-01-05T12:57:25.6830314-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3ab53148-a2c2-4c1e-9bf5-272a435c6d2a">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e4be0992-fd2c-4d80-b16e-ab76466b1a45" testId="fee8be76-3f69-0ff8-c397-d26416047614" testName="GetAllTodos_FilterByCompleted_ReturnsOnlyCompletedTodos" computerName="BRY" duration="00:00:00.5480570" startTime="2026-01-05T12:57:41.4864634-05:00" endTime="2026-01-05T12:57:42.0345199-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e4be0992-fd2c-4d80-b16e-ab76466b1a45">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+        <ErrorInfo>
+          <Message>Expected result to contain only items matching (t.IsCompleted == True), but {&#xD;
+    WebApi.DTOs.Todos.TodoItemDto&#xD;
+    {&#xD;
+        CreatedAt = &lt;2026-01-05 17:57:42.0013915&gt;,&#xD;
+        Description = "First test todo",&#xD;
+        DueDate = &lt;2026-01-06 17:57:42.0013902&gt;,&#xD;
+        Id = {3a0bdbba-4bf6-4066-8f3a-f1051b698d53},&#xD;
+        IsCompleted = False,&#xD;
+        Priority = Priority.High {value: 2},&#xD;
+        Tags = WebApi.DTOs.Tags.TagDto&#xD;
+        {&#xD;
+            {&#xD;
+                Color = "#FF5733",&#xD;
+                Id = {5159306d-3781-4090-9e33-a6fe93d24616},&#xD;
+                Name = "Work",&#xD;
+                TodoCount = 0&#xD;
+            }&#xD;
+        }&#xD;
+    ,&#xD;
+        Title = "Test Todo 1",&#xD;
+        UpdatedAt = &lt;2026-01-05 17:57:42.0013917&gt;&#xD;
+    }&#xD;
+} do(es) not match.</Message>
+          <StackTrace>   at FluentAssertions.Execution.LateBoundTestFramework.Throw(String message)&#xD;
+   at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(Func`1 getFailureReason)&#xD;
+   at FluentAssertions.Execution.GivenSelector`1.FailWith(String message, Object[] args)&#xD;
+   at FluentAssertions.Execution.GivenSelector`1.FailWith(String message, Func`2[] args)&#xD;
+   at FluentAssertions.Collections.GenericCollectionAssertions`3.&lt;&gt;c__DisplayClass86_0.&lt;OnlyContain&gt;b__0(AssertionChain chain)&#xD;
+   at FluentAssertions.Execution.AssertionChain.WithExpectation(String message, Action`1 chain, Object[] args)&#xD;
+   at FluentAssertions.Execution.AssertionChain.WithExpectation(String message, Object arg1, Action`1 chain)&#xD;
+   at FluentAssertions.Collections.GenericCollectionAssertions`3.OnlyContain(Expression`1 predicate, String because, Object[] becauseArgs)&#xD;
+   at WebApi.Tests.Controllers.TodosControllerTests.GetAllTodos_FilterByCompleted_ReturnsOnlyCompletedTodos() in C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\Controllers\TodosControllerTests.cs:line 56&#xD;
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.BlockUntilCompleted()&#xD;
+   at NUnit.Framework.Internal.MessagePumpStrategy.NoMessagePumpStrategy.WaitForCompletion(AwaitAdapter awaiter)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await[TResult](TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()&#xD;
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)&#xD;
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e8a30f9d-7dd9-4b26-9485-1c9cf4c95f01" testId="e999adf5-3047-2cf0-7625-f22da6c525d5" testName="CreateTodo_WithValidData_ReturnsCreated" computerName="BRY" duration="00:00:00.5321080" startTime="2026-01-05T12:57:39.3491215-05:00" endTime="2026-01-05T12:57:39.8812290-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e8a30f9d-7dd9-4b26-9485-1c9cf4c95f01">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="35da76c6-39e3-4910-9de3-17a80ae6a1de" testId="48d2b8e4-5da0-a633-48e4-759f522563b6" testName="Login_WithEmail_ReturnsToken" computerName="BRY" duration="00:00:00.7991400" startTime="2026-01-05T12:57:22.6805989-05:00" endTime="2026-01-05T12:57:23.4797378-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="35da76c6-39e3-4910-9de3-17a80ae6a1de">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a537a159-c9a4-4e3a-8c36-51507aa8aa1e" testId="186bfde2-1a8b-b120-bf99-1df9efde74ab" testName="CreateTag_WithEmptyName_ReturnsBadRequest" computerName="BRY" duration="00:00:00.5307980" startTime="2026-01-05T12:57:29.6651844-05:00" endTime="2026-01-05T12:57:30.1959817-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a537a159-c9a4-4e3a-8c36-51507aa8aa1e">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+        <ErrorInfo>
+          <Message>Expected response.StatusCode to be HttpStatusCode.BadRequest {value: 400}, but found HttpStatusCode.Created {value: 201}.</Message>
+          <StackTrace>   at FluentAssertions.Execution.LateBoundTestFramework.Throw(String message)&#xD;
+   at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message)&#xD;
+   at FluentAssertions.Execution.AssertionScope.AddPreFormattedFailure(String formattedFailureMessage)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(Func`1 getFailureReason)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(Func`1 getFailureReason)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(String message, Object[] args)&#xD;
+   at FluentAssertions.Primitives.EnumAssertions`2.Be(TEnum expected, String because, Object[] becauseArgs)&#xD;
+   at WebApi.Tests.Controllers.TagsControllerTests.CreateTag_WithEmptyName_ReturnsBadRequest() in C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\Controllers\TagsControllerTests.cs:line 148&#xD;
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.BlockUntilCompleted()&#xD;
+   at NUnit.Framework.Internal.MessagePumpStrategy.NoMessagePumpStrategy.WaitForCompletion(AwaitAdapter awaiter)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await[TResult](TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()&#xD;
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)&#xD;
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f819f4ea-2fcb-45ab-8e58-6f5f0d73a6ee" testId="13ad20f4-4b3d-6a51-29c6-5b67aef5bb0f" testName="GetTodoById_WithNonExistentId_ReturnsNotFound" computerName="BRY" duration="00:00:00.5271580" startTime="2026-01-05T12:57:44.6960549-05:00" endTime="2026-01-05T12:57:45.2232119-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f819f4ea-2fcb-45ab-8e58-6f5f0d73a6ee">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4de61593-f94a-44af-833f-63e62f70b26d" testId="81f89f17-82cf-d52a-3f11-32b2c85cf8d1" testName="GetTagById_OtherUsersTag_ReturnsNotFound" computerName="BRY" duration="00:00:00.5251010" startTime="2026-01-05T12:57:33.4439657-05:00" endTime="2026-01-05T12:57:33.9690661-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4de61593-f94a-44af-833f-63e62f70b26d">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e3e19cc6-71a9-4a40-b0e2-b7665061a443" testId="4d024fb7-df5c-cc39-dcdb-1cec23d9118d" testName="DeleteTodo_OtherUsersTodo_ReturnsNotFound" computerName="BRY" duration="00:00:00.5338490" startTime="2026-01-05T12:57:40.4126614-05:00" endTime="2026-01-05T12:57:40.9465093-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e3e19cc6-71a9-4a40-b0e2-b7665061a443">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="8dac2660-77ef-4cea-9b76-d09eaafa037e" testId="52a3e505-1b77-5090-ae95-0d3238b85de5" testName="Register_WithInvalidEmail_ReturnsBadRequest" computerName="BRY" duration="00:00:00.8170530" startTime="2026-01-05T12:57:26.7484117-05:00" endTime="2026-01-05T12:57:27.5654639-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8dac2660-77ef-4cea-9b76-d09eaafa037e">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+        <ErrorInfo>
+          <Message>Expected response.StatusCode to be HttpStatusCode.BadRequest {value: 400}, but found HttpStatusCode.Created {value: 201}.</Message>
+          <StackTrace>   at FluentAssertions.Execution.LateBoundTestFramework.Throw(String message)&#xD;
+   at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message)&#xD;
+   at FluentAssertions.Execution.AssertionScope.AddPreFormattedFailure(String formattedFailureMessage)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(Func`1 getFailureReason)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(Func`1 getFailureReason)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(String message, Object[] args)&#xD;
+   at FluentAssertions.Primitives.EnumAssertions`2.Be(TEnum expected, String because, Object[] becauseArgs)&#xD;
+   at WebApi.Tests.Controllers.AuthControllerTests.Register_WithInvalidEmail_ReturnsBadRequest() in C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\Controllers\AuthControllerTests.cs:line 107&#xD;
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.BlockUntilCompleted()&#xD;
+   at NUnit.Framework.Internal.MessagePumpStrategy.NoMessagePumpStrategy.WaitForCompletion(AwaitAdapter awaiter)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await[TResult](TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()&#xD;
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)&#xD;
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="891588b7-8ac9-4a0b-83dc-7203a9312676" testId="56c4abb1-5265-adcc-a289-3a11da880f0b" testName="Login_WithInvalidPassword_ReturnsUnauthorized" computerName="BRY" duration="00:00:00.8205630" startTime="2026-01-05T12:57:23.4797760-05:00" endTime="2026-01-05T12:57:24.3003377-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="891588b7-8ac9-4a0b-83dc-7203a9312676">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c793c92e-6be2-44e3-85d7-28b95add988d" testId="a26be0eb-b6e7-6a23-4548-f8d1cf512d07" testName="Register_WithShortPassword_ReturnsBadRequest" computerName="BRY" duration="00:00:00.7850710" startTime="2026-01-05T12:57:27.5655341-05:00" endTime="2026-01-05T12:57:28.3506048-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c793c92e-6be2-44e3-85d7-28b95add988d">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+        <ErrorInfo>
+          <Message>Expected response.StatusCode to be HttpStatusCode.BadRequest {value: 400}, but found HttpStatusCode.Created {value: 201}.</Message>
+          <StackTrace>   at FluentAssertions.Execution.LateBoundTestFramework.Throw(String message)&#xD;
+   at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message)&#xD;
+   at FluentAssertions.Execution.AssertionScope.AddPreFormattedFailure(String formattedFailureMessage)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(Func`1 getFailureReason)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(Func`1 getFailureReason)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(String message, Object[] args)&#xD;
+   at FluentAssertions.Primitives.EnumAssertions`2.Be(TEnum expected, String because, Object[] becauseArgs)&#xD;
+   at WebApi.Tests.Controllers.AuthControllerTests.Register_WithShortPassword_ReturnsBadRequest() in C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\Controllers\AuthControllerTests.cs:line 125&#xD;
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.BlockUntilCompleted()&#xD;
+   at NUnit.Framework.Internal.MessagePumpStrategy.NoMessagePumpStrategy.WaitForCompletion(AwaitAdapter awaiter)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await[TResult](TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()&#xD;
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)&#xD;
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="137ed363-e5bd-4561-a0b2-905eb388f952" testId="091a0d65-863d-a7de-be02-6a319326aa9a" testName="ToggleTodoCompletion_NonExistentId_ReturnsNotFound" computerName="BRY" duration="00:00:00.5266020" startTime="2026-01-05T12:57:46.2830874-05:00" endTime="2026-01-05T12:57:46.8096885-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="137ed363-e5bd-4561-a0b2-905eb388f952">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="eafd5097-98e6-4d8b-8069-39516a71335e" testId="4ced3869-979e-3509-a0e2-2de42f65f1d3" testName="ToggleTodoCompletion_CompletesTodo_ReturnsOk" computerName="BRY" duration="00:00:00.5283450" startTime="2026-01-05T12:57:45.7547186-05:00" endTime="2026-01-05T12:57:46.2830634-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eafd5097-98e6-4d8b-8069-39516a71335e">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ff032ea1-f344-4f9a-8a2f-12816723edfd" testId="964ddc03-ec87-5b63-2332-e1aca0da218e" testName="UpdateTag_WithValidData_ReturnsOk" computerName="BRY" duration="00:00:00.5346419" startTime="2026-01-05T12:57:37.7544333-05:00" endTime="2026-01-05T12:57:38.2890747-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ff032ea1-f344-4f9a-8a2f-12816723edfd">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6ef30455-baa5-4c55-b843-5d71c94656f8" testId="04a4069d-67ab-f7c7-acbf-1c35cafb72d0" testName="CreateTag_WithInvalidColor_ReturnsBadRequest" computerName="BRY" duration="00:00:00.5261380" startTime="2026-01-05T12:57:30.1960112-05:00" endTime="2026-01-05T12:57:30.7221500-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6ef30455-baa5-4c55-b843-5d71c94656f8">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+        <ErrorInfo>
+          <Message>Expected response.StatusCode to be HttpStatusCode.BadRequest {value: 400}, but found HttpStatusCode.Created {value: 201}.</Message>
+          <StackTrace>   at FluentAssertions.Execution.LateBoundTestFramework.Throw(String message)&#xD;
+   at FluentAssertions.Execution.DefaultAssertionStrategy.HandleFailure(String message)&#xD;
+   at FluentAssertions.Execution.AssertionScope.AddPreFormattedFailure(String formattedFailureMessage)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(Func`1 getFailureReason)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(Func`1 getFailureReason)&#xD;
+   at FluentAssertions.Execution.AssertionChain.FailWith(String message, Object[] args)&#xD;
+   at FluentAssertions.Primitives.EnumAssertions`2.Be(TEnum expected, String because, Object[] becauseArgs)&#xD;
+   at WebApi.Tests.Controllers.TagsControllerTests.CreateTag_WithInvalidColor_ReturnsBadRequest() in C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\Controllers\TagsControllerTests.cs:line 165&#xD;
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.BlockUntilCompleted()&#xD;
+   at NUnit.Framework.Internal.MessagePumpStrategy.NoMessagePumpStrategy.WaitForCompletion(AwaitAdapter awaiter)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await[TResult](TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(TestExecutionContext context, Func`1 invoke)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)&#xD;
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()&#xD;
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)&#xD;
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f441cec1-d9e2-4d63-bf33-3b971b32900d" testId="87e566d3-9ee5-2681-bcbd-db098d929b9a" testName="UpdateTag_NonExistentId_ReturnsNotFound" computerName="BRY" duration="00:00:00.5279350" startTime="2026-01-05T12:57:36.1625383-05:00" endTime="2026-01-05T12:57:36.6904734-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f441cec1-d9e2-4d63-bf33-3b971b32900d">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c386bb7c-3694-4d4b-8102-7990490ba4c0" testId="3109c202-bcf3-33c6-1065-70d0f6737c02" testName="CreateTag_WithDuplicateName_ReturnsBadRequest" computerName="BRY" duration="00:00:00.5272880" startTime="2026-01-05T12:57:29.1378637-05:00" endTime="2026-01-05T12:57:29.6651519-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c386bb7c-3694-4d4b-8102-7990490ba4c0">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b341d9b7-3484-4d27-8c2b-78e9e631c69b" testId="ce954a5e-3f09-897a-ea8b-80ab253e3712" testName="Login_WithNonExistentUser_ReturnsUnauthorized" computerName="BRY" duration="00:00:00.5966950" startTime="2026-01-05T12:57:24.3004053-05:00" endTime="2026-01-05T12:57:24.8971004-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b341d9b7-3484-4d27-8c2b-78e9e631c69b">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7eb45ee1-563a-484e-a04a-4ad18f4416c9" testId="c16f4c4c-dfc1-3117-1bc1-c6d7f41483e3" testName="GetTagById_WithValidId_ReturnsOk" computerName="BRY" duration="00:00:00.5377270" startTime="2026-01-05T12:57:34.4983353-05:00" endTime="2026-01-05T12:57:35.0360620-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7eb45ee1-563a-484e-a04a-4ad18f4416c9">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="dd1d5f6e-1cb4-4705-93dd-f789986cf715" testId="38e9f8c3-53cf-f8aa-5da9-4bbeff59b60a" testName="GetTodoById_OtherUsersTodo_ReturnsNotFound" computerName="BRY" duration="00:00:00.5337030" startTime="2026-01-05T12:57:44.1623235-05:00" endTime="2026-01-05T12:57:44.6960260-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dd1d5f6e-1cb4-4705-93dd-f789986cf715">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ca3401c8-f1db-42a5-925c-e61b1e139ff5" testId="3a11fc29-6062-1f3c-13c5-c2ecb2818977" testName="DeleteTag_OtherUsersTag_ReturnsNotFound" computerName="BRY" duration="00:00:00.5361089" startTime="2026-01-05T12:57:31.7987477-05:00" endTime="2026-01-05T12:57:32.3348564-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ca3401c8-f1db-42a5-925c-e61b1e139ff5">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="bcf85752-45cb-496d-b4e7-85934ba5516d" testId="3d2df3b1-09f9-9a77-26c9-6c7b6d882f8b" testName="Register_WithValidData_ReturnsCreated" computerName="BRY" duration="00:00:00.7854260" startTime="2026-01-05T12:57:28.3506800-05:00" endTime="2026-01-05T12:57:29.1361057-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bcf85752-45cb-496d-b4e7-85934ba5516d">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ffa955fa-dadb-4dfb-bff0-a5bda49d0162" testId="a086287a-e541-fe3e-0828-42d6461fdd5d" testName="TagTodoAssociation_CreateTodoWithTags_TagsAreAssociated" computerName="BRY" duration="00:00:00.5704410" startTime="2026-01-05T12:57:35.0361152-05:00" endTime="2026-01-05T12:57:35.6065561-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ffa955fa-dadb-4dfb-bff0-a5bda49d0162">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b3db7feb-9958-4706-9b67-fca3c82e420b" testId="5b558c79-4ca8-fee5-16d9-08cbe297452d" testName="GetCurrentUser_WithoutToken_ReturnsUnauthorized" computerName="BRY" duration="00:00:00.5597710" startTime="2026-01-05T12:57:21.1746928-05:00" endTime="2026-01-05T12:57:21.7344631-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b3db7feb-9958-4706-9b67-fca3c82e420b">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="834b33d2-e475-40d8-80c0-135de4fca679" testId="f1f4f1e4-2183-f807-e4ee-840e6d8d12aa" testName="Register_WithDuplicateEmail_ReturnsBadRequest" computerName="BRY" duration="00:00:00.5358929" startTime="2026-01-05T12:57:25.6830674-05:00" endTime="2026-01-05T12:57:26.2189607-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="834b33d2-e475-40d8-80c0-135de4fca679">
+      <Output>
+        <StdOut>info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...</StdOut>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TagTodoAssociation_DeleteTag_TodosNoLongerHaveTag" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="0f17dea0-aee7-4e96-ae32-357e111a4523">
+      <Execution id="89c39ce5-3ce3-4216-9084-94b3510a61d1" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="TagTodoAssociation_DeleteTag_TodosNoLongerHaveTag" />
+    </UnitTest>
+    <UnitTest name="CreateTodo_WithEmptyTitle_ReturnsBadRequest" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="a5c235ae-f617-7a06-ab5a-030c9355fde8">
+      <Execution id="099025f2-6289-4b96-816e-106af61841fe" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="CreateTodo_WithEmptyTitle_ReturnsBadRequest" />
+    </UnitTest>
+    <UnitTest name="CreateTag_WithValidData_ReturnsCreated" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="ad6a8681-87a3-4f90-233c-3c66392aea02">
+      <Execution id="95bacfef-fbb0-4e75-b483-fa59aa7893ba" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="CreateTag_WithValidData_ReturnsCreated" />
+    </UnitTest>
+    <UnitTest name="TagTodoAssociation_CreateTodoWithTags_TagsAreAssociated" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="a086287a-e541-fe3e-0828-42d6461fdd5d">
+      <Execution id="ffa955fa-dadb-4dfb-bff0-a5bda49d0162" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="TagTodoAssociation_CreateTodoWithTags_TagsAreAssociated" />
+    </UnitTest>
+    <UnitTest name="Register_WithValidData_ReturnsCreated" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="3d2df3b1-09f9-9a77-26c9-6c7b6d882f8b">
+      <Execution id="bcf85752-45cb-496d-b4e7-85934ba5516d" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.AuthControllerTests" name="Register_WithValidData_ReturnsCreated" />
+    </UnitTest>
+    <UnitTest name="Login_WithValidCredentials_ReturnsToken" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="3eba6c44-23de-7be8-51f9-96d97780b645">
+      <Execution id="3ab53148-a2c2-4c1e-9bf5-272a435c6d2a" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.AuthControllerTests" name="Login_WithValidCredentials_ReturnsToken" />
+    </UnitTest>
+    <UnitTest name="UpdateTag_NonExistentId_ReturnsNotFound" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="87e566d3-9ee5-2681-bcbd-db098d929b9a">
+      <Execution id="f441cec1-d9e2-4d63-bf33-3b971b32900d" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="UpdateTag_NonExistentId_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="GetTodoById_WithValidId_ReturnsOk" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="170f085b-4d14-9381-619c-f8380f156725">
+      <Execution id="7d96e1f3-60f8-47e2-ae44-8fe57d2ac19c" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="GetTodoById_WithValidId_ReturnsOk" />
+    </UnitTest>
+    <UnitTest name="Register_WithInvalidEmail_ReturnsBadRequest" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="52a3e505-1b77-5090-ae95-0d3238b85de5">
+      <Execution id="8dac2660-77ef-4cea-9b76-d09eaafa037e" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.AuthControllerTests" name="Register_WithInvalidEmail_ReturnsBadRequest" />
+    </UnitTest>
+    <UnitTest name="Register_WithDuplicateUsername_ReturnsBadRequest" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="0ba0fd0c-171a-c258-f69f-053407736c76">
+      <Execution id="90991e32-00ec-490d-847d-bfdd87d3f738" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.AuthControllerTests" name="Register_WithDuplicateUsername_ReturnsBadRequest" />
+    </UnitTest>
+    <UnitTest name="DeleteTodo_NonExistentId_ReturnsNotFound" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="ade7ea0c-667f-727a-f908-ccdad3c03d59">
+      <Execution id="0c1e72a3-6fda-464f-adc4-1a99ae9b2378" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="DeleteTodo_NonExistentId_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="DeleteTag_WithValidId_ReturnsNoContent" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="62f22fd2-37ec-2151-5b98-079fd6f29cc8">
+      <Execution id="9e2d97b5-4d9f-47bb-85cc-7718cd9027ac" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="DeleteTag_WithValidId_ReturnsNoContent" />
+    </UnitTest>
+    <UnitTest name="GetTodoById_OtherUsersTodo_ReturnsNotFound" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="38e9f8c3-53cf-f8aa-5da9-4bbeff59b60a">
+      <Execution id="dd1d5f6e-1cb4-4705-93dd-f789986cf715" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="GetTodoById_OtherUsersTodo_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="GetAllTags_ReturnsOkWithTags" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="0c457f24-aff6-1ea7-f71f-10b95ef696c5">
+      <Execution id="c0b69388-31f3-4fa8-a19e-7e0b58783953" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="GetAllTags_ReturnsOkWithTags" />
+    </UnitTest>
+    <UnitTest name="UpdateTag_WithDuplicateName_ReturnsBadRequest" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="a32015a8-072f-6736-d293-65926fef1708">
+      <Execution id="923df591-f9eb-4f9b-9e00-66cef0e0f430" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="UpdateTag_WithDuplicateName_ReturnsBadRequest" />
+    </UnitTest>
+    <UnitTest name="ToggleTodoCompletion_NonExistentId_ReturnsNotFound" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="091a0d65-863d-a7de-be02-6a319326aa9a">
+      <Execution id="137ed363-e5bd-4561-a0b2-905eb388f952" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="ToggleTodoCompletion_NonExistentId_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="GetAllTodos_FilterByPending_ReturnsOnlyPendingTodos" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="6d326e60-2177-25f6-b4f4-4c04bbc07cf8">
+      <Execution id="2aeb9cde-a517-44a9-9360-efa50e3339e2" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="GetAllTodos_FilterByPending_ReturnsOnlyPendingTodos" />
+    </UnitTest>
+    <UnitTest name="DeleteTodo_OtherUsersTodo_ReturnsNotFound" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="4d024fb7-df5c-cc39-dcdb-1cec23d9118d">
+      <Execution id="e3e19cc6-71a9-4a40-b0e2-b7665061a443" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="DeleteTodo_OtherUsersTodo_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="UpdateTodo_WithValidData_ReturnsOk" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="8026cd4f-21f0-8e0d-d122-e9e95ad0e7eb">
+      <Execution id="a399c8ff-07e1-4d22-86f7-d48c3c370514" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="UpdateTodo_WithValidData_ReturnsOk" />
+    </UnitTest>
+    <UnitTest name="DeleteTodo_WithValidId_ReturnsNoContent" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="f72370cc-3997-dc09-715a-e461a6953936">
+      <Execution id="aa767826-a1d8-4aee-ad32-825118a26d0f" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="DeleteTodo_WithValidId_ReturnsNoContent" />
+    </UnitTest>
+    <UnitTest name="GetAllTodos_ReturnsOkWithTodos" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="08d7a87f-8aa5-c7a8-e5ee-faec78f8215e">
+      <Execution id="0e3a5f72-2531-495e-b6d2-5478d438b486" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="GetAllTodos_ReturnsOkWithTodos" />
+    </UnitTest>
+    <UnitTest name="UpdateTag_OtherUsersTag_ReturnsNotFound" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="36d22c23-6c28-51fc-9cf2-17f2d002872d">
+      <Execution id="2f735663-6edc-491c-8a6a-9edfe433c5e7" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="UpdateTag_OtherUsersTag_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="GetCurrentUser_WithValidToken_ReturnsUser" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="f676405e-d98b-49f3-fdfb-241bade7d01a">
+      <Execution id="63e8bcdf-c81b-4690-b191-c6d1d76993ef" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.AuthControllerTests" name="GetCurrentUser_WithValidToken_ReturnsUser" />
+    </UnitTest>
+    <UnitTest name="DeleteTag_OtherUsersTag_ReturnsNotFound" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="3a11fc29-6062-1f3c-13c5-c2ecb2818977">
+      <Execution id="ca3401c8-f1db-42a5-925c-e61b1e139ff5" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="DeleteTag_OtherUsersTag_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="Register_WithShortPassword_ReturnsBadRequest" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="a26be0eb-b6e7-6a23-4548-f8d1cf512d07">
+      <Execution id="c793c92e-6be2-44e3-85d7-28b95add988d" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.AuthControllerTests" name="Register_WithShortPassword_ReturnsBadRequest" />
+    </UnitTest>
+    <UnitTest name="GetAllTodos_FilterByTag_ReturnsOnlyTodosWithTag" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="b1181f86-3a9b-ad1f-603c-c9092a5d4333">
+      <Execution id="523d8205-acdc-48c2-ae0c-0281604c15af" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="GetAllTodos_FilterByTag_ReturnsOnlyTodosWithTag" />
+    </UnitTest>
+    <UnitTest name="CreateTodo_WithTags_ReturnsCreatedWithTags" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="e3202dd6-ab0d-72c8-5210-dd70bd931c3f">
+      <Execution id="85aa74d0-d57e-4254-b39d-80e1e69a1c47" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="CreateTodo_WithTags_ReturnsCreatedWithTags" />
+    </UnitTest>
+    <UnitTest name="GetTodoById_WithNonExistentId_ReturnsNotFound" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="13ad20f4-4b3d-6a51-29c6-5b67aef5bb0f">
+      <Execution id="f819f4ea-2fcb-45ab-8e58-6f5f0d73a6ee" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="GetTodoById_WithNonExistentId_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="UpdateTag_WithValidData_ReturnsOk" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="964ddc03-ec87-5b63-2332-e1aca0da218e">
+      <Execution id="ff032ea1-f344-4f9a-8a2f-12816723edfd" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="UpdateTag_WithValidData_ReturnsOk" />
+    </UnitTest>
+    <UnitTest name="GetTagById_OtherUsersTag_ReturnsNotFound" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="81f89f17-82cf-d52a-3f11-32b2c85cf8d1">
+      <Execution id="4de61593-f94a-44af-833f-63e62f70b26d" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="GetTagById_OtherUsersTag_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="Login_WithNonExistentUser_ReturnsUnauthorized" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="ce954a5e-3f09-897a-ea8b-80ab253e3712">
+      <Execution id="b341d9b7-3484-4d27-8c2b-78e9e631c69b" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.AuthControllerTests" name="Login_WithNonExistentUser_ReturnsUnauthorized" />
+    </UnitTest>
+    <UnitTest name="ToggleTodoCompletion_CompletesTodo_ReturnsOk" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="4ced3869-979e-3509-a0e2-2de42f65f1d3">
+      <Execution id="eafd5097-98e6-4d8b-8069-39516a71335e" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="ToggleTodoCompletion_CompletesTodo_ReturnsOk" />
+    </UnitTest>
+    <UnitTest name="Register_WithDuplicateEmail_ReturnsBadRequest" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="f1f4f1e4-2183-f807-e4ee-840e6d8d12aa">
+      <Execution id="834b33d2-e475-40d8-80c0-135de4fca679" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.AuthControllerTests" name="Register_WithDuplicateEmail_ReturnsBadRequest" />
+    </UnitTest>
+    <UnitTest name="CreateTodo_WithValidData_ReturnsCreated" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="e999adf5-3047-2cf0-7625-f22da6c525d5">
+      <Execution id="e8a30f9d-7dd9-4b26-9485-1c9cf4c95f01" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="CreateTodo_WithValidData_ReturnsCreated" />
+    </UnitTest>
+    <UnitTest name="GetTagById_WithNonExistentId_ReturnsNotFound" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="796bb581-0eb5-3223-6923-a782589060e7">
+      <Execution id="b14c1ebf-cfbe-411d-840d-571c719c6d4c" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="GetTagById_WithNonExistentId_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="UpdateTodo_OtherUsersTodo_ReturnsNotFound" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="1e58fb82-af13-232d-d5b3-6aab89ce125a">
+      <Execution id="ee2ef543-4cad-4f34-9fb8-5af573d7218a" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="UpdateTodo_OtherUsersTodo_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="CreateTag_WithEmptyName_ReturnsBadRequest" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="186bfde2-1a8b-b120-bf99-1df9efde74ab">
+      <Execution id="a537a159-c9a4-4e3a-8c36-51507aa8aa1e" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="CreateTag_WithEmptyName_ReturnsBadRequest" />
+    </UnitTest>
+    <UnitTest name="GetAllTodos_FilterByCompleted_ReturnsOnlyCompletedTodos" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="fee8be76-3f69-0ff8-c397-d26416047614">
+      <Execution id="e4be0992-fd2c-4d80-b16e-ab76466b1a45" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="GetAllTodos_FilterByCompleted_ReturnsOnlyCompletedTodos" />
+    </UnitTest>
+    <UnitTest name="CreateTag_WithDuplicateName_ReturnsBadRequest" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="3109c202-bcf3-33c6-1065-70d0f6737c02">
+      <Execution id="c386bb7c-3694-4d4b-8102-7990490ba4c0" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="CreateTag_WithDuplicateName_ReturnsBadRequest" />
+    </UnitTest>
+    <UnitTest name="GetAllTodos_FilterByPriority_ReturnsOnlyMatchingPriority" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="cc1b18ea-a8b8-be6b-ac87-901ec9f25322">
+      <Execution id="5930fd51-75b5-4ef1-b336-c118d6dbb161" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="GetAllTodos_FilterByPriority_ReturnsOnlyMatchingPriority" />
+    </UnitTest>
+    <UnitTest name="DeleteTag_NonExistentId_ReturnsNotFound" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="39306b4a-aee3-4fa0-60ef-33aaa0db0887">
+      <Execution id="8b50820a-a2a2-4fd9-890e-493dd1a1bebc" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="DeleteTag_NonExistentId_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="GetTagById_WithValidId_ReturnsOk" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="c16f4c4c-dfc1-3117-1bc1-c6d7f41483e3">
+      <Execution id="7eb45ee1-563a-484e-a04a-4ad18f4416c9" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="GetTagById_WithValidId_ReturnsOk" />
+    </UnitTest>
+    <UnitTest name="Login_WithEmail_ReturnsToken" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="48d2b8e4-5da0-a633-48e4-759f522563b6">
+      <Execution id="35da76c6-39e3-4910-9de3-17a80ae6a1de" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.AuthControllerTests" name="Login_WithEmail_ReturnsToken" />
+    </UnitTest>
+    <UnitTest name="UpdateTodo_NonExistentId_ReturnsNotFound" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="f1f92d68-7423-2cde-131d-e6213eb5b2a2">
+      <Execution id="30ce2341-d661-4070-9769-ddc138f8334e" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TodosControllerTests" name="UpdateTodo_NonExistentId_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="CreateTag_WithInvalidColor_ReturnsBadRequest" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="04a4069d-67ab-f7c7-acbf-1c35cafb72d0">
+      <Execution id="6ef30455-baa5-4c55-b843-5d71c94656f8" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.TagsControllerTests" name="CreateTag_WithInvalidColor_ReturnsBadRequest" />
+    </UnitTest>
+    <UnitTest name="Login_WithInvalidPassword_ReturnsUnauthorized" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="56c4abb1-5265-adcc-a289-3a11da880f0b">
+      <Execution id="891588b7-8ac9-4a0b-83dc-7203a9312676" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.AuthControllerTests" name="Login_WithInvalidPassword_ReturnsUnauthorized" />
+    </UnitTest>
+    <UnitTest name="GetCurrentUser_WithoutToken_ReturnsUnauthorized" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="5b558c79-4ca8-fee5-16d9-08cbe297452d">
+      <Execution id="b3db7feb-9958-4706-9b67-fca3c82e420b" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.AuthControllerTests" name="GetCurrentUser_WithoutToken_ReturnsUnauthorized" />
+    </UnitTest>
+    <UnitTest name="GetCurrentUser_WithInvalidToken_ReturnsUnauthorized" storage="c:\users\bryan\riderprojects\asptemplate\tests\webapi.tests\bin\debug\net10.0\webapi.tests.dll" id="070eab8d-bda3-e750-9670-5aae1a01453c">
+      <Execution id="b612122e-077b-4d7d-bf79-11064a75cbab" />
+      <TestMethod codeBase="C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="WebApi.Tests.Controllers.AuthControllerTests" name="GetCurrentUser_WithInvalidToken_ReturnsUnauthorized" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="36d22c23-6c28-51fc-9cf2-17f2d002872d" executionId="2f735663-6edc-491c-8a6a-9edfe433c5e7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a5c235ae-f617-7a06-ab5a-030c9355fde8" executionId="099025f2-6289-4b96-816e-106af61841fe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cc1b18ea-a8b8-be6b-ac87-901ec9f25322" executionId="5930fd51-75b5-4ef1-b336-c118d6dbb161" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f1f92d68-7423-2cde-131d-e6213eb5b2a2" executionId="30ce2341-d661-4070-9769-ddc138f8334e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6d326e60-2177-25f6-b4f4-4c04bbc07cf8" executionId="2aeb9cde-a517-44a9-9360-efa50e3339e2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ade7ea0c-667f-727a-f908-ccdad3c03d59" executionId="0c1e72a3-6fda-464f-adc4-1a99ae9b2378" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0ba0fd0c-171a-c258-f69f-053407736c76" executionId="90991e32-00ec-490d-847d-bfdd87d3f738" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b1181f86-3a9b-ad1f-603c-c9092a5d4333" executionId="523d8205-acdc-48c2-ae0c-0281604c15af" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8026cd4f-21f0-8e0d-d122-e9e95ad0e7eb" executionId="a399c8ff-07e1-4d22-86f7-d48c3c370514" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="170f085b-4d14-9381-619c-f8380f156725" executionId="7d96e1f3-60f8-47e2-ae44-8fe57d2ac19c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f72370cc-3997-dc09-715a-e461a6953936" executionId="aa767826-a1d8-4aee-ad32-825118a26d0f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="39306b4a-aee3-4fa0-60ef-33aaa0db0887" executionId="8b50820a-a2a2-4fd9-890e-493dd1a1bebc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0c457f24-aff6-1ea7-f71f-10b95ef696c5" executionId="c0b69388-31f3-4fa8-a19e-7e0b58783953" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a32015a8-072f-6736-d293-65926fef1708" executionId="923df591-f9eb-4f9b-9e00-66cef0e0f430" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f676405e-d98b-49f3-fdfb-241bade7d01a" executionId="63e8bcdf-c81b-4690-b191-c6d1d76993ef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0f17dea0-aee7-4e96-ae32-357e111a4523" executionId="89c39ce5-3ce3-4216-9084-94b3510a61d1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="08d7a87f-8aa5-c7a8-e5ee-faec78f8215e" executionId="0e3a5f72-2531-495e-b6d2-5478d438b486" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e3202dd6-ab0d-72c8-5210-dd70bd931c3f" executionId="85aa74d0-d57e-4254-b39d-80e1e69a1c47" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="796bb581-0eb5-3223-6923-a782589060e7" executionId="b14c1ebf-cfbe-411d-840d-571c719c6d4c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="62f22fd2-37ec-2151-5b98-079fd6f29cc8" executionId="9e2d97b5-4d9f-47bb-85cc-7718cd9027ac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ad6a8681-87a3-4f90-233c-3c66392aea02" executionId="95bacfef-fbb0-4e75-b483-fa59aa7893ba" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="070eab8d-bda3-e750-9670-5aae1a01453c" executionId="b612122e-077b-4d7d-bf79-11064a75cbab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e58fb82-af13-232d-d5b3-6aab89ce125a" executionId="ee2ef543-4cad-4f34-9fb8-5af573d7218a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3eba6c44-23de-7be8-51f9-96d97780b645" executionId="3ab53148-a2c2-4c1e-9bf5-272a435c6d2a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fee8be76-3f69-0ff8-c397-d26416047614" executionId="e4be0992-fd2c-4d80-b16e-ab76466b1a45" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e999adf5-3047-2cf0-7625-f22da6c525d5" executionId="e8a30f9d-7dd9-4b26-9485-1c9cf4c95f01" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="48d2b8e4-5da0-a633-48e4-759f522563b6" executionId="35da76c6-39e3-4910-9de3-17a80ae6a1de" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="186bfde2-1a8b-b120-bf99-1df9efde74ab" executionId="a537a159-c9a4-4e3a-8c36-51507aa8aa1e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="13ad20f4-4b3d-6a51-29c6-5b67aef5bb0f" executionId="f819f4ea-2fcb-45ab-8e58-6f5f0d73a6ee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="81f89f17-82cf-d52a-3f11-32b2c85cf8d1" executionId="4de61593-f94a-44af-833f-63e62f70b26d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4d024fb7-df5c-cc39-dcdb-1cec23d9118d" executionId="e3e19cc6-71a9-4a40-b0e2-b7665061a443" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="52a3e505-1b77-5090-ae95-0d3238b85de5" executionId="8dac2660-77ef-4cea-9b76-d09eaafa037e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="56c4abb1-5265-adcc-a289-3a11da880f0b" executionId="891588b7-8ac9-4a0b-83dc-7203a9312676" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a26be0eb-b6e7-6a23-4548-f8d1cf512d07" executionId="c793c92e-6be2-44e3-85d7-28b95add988d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="091a0d65-863d-a7de-be02-6a319326aa9a" executionId="137ed363-e5bd-4561-a0b2-905eb388f952" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4ced3869-979e-3509-a0e2-2de42f65f1d3" executionId="eafd5097-98e6-4d8b-8069-39516a71335e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="964ddc03-ec87-5b63-2332-e1aca0da218e" executionId="ff032ea1-f344-4f9a-8a2f-12816723edfd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="04a4069d-67ab-f7c7-acbf-1c35cafb72d0" executionId="6ef30455-baa5-4c55-b843-5d71c94656f8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="87e566d3-9ee5-2681-bcbd-db098d929b9a" executionId="f441cec1-d9e2-4d63-bf33-3b971b32900d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3109c202-bcf3-33c6-1065-70d0f6737c02" executionId="c386bb7c-3694-4d4b-8102-7990490ba4c0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ce954a5e-3f09-897a-ea8b-80ab253e3712" executionId="b341d9b7-3484-4d27-8c2b-78e9e631c69b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c16f4c4c-dfc1-3117-1bc1-c6d7f41483e3" executionId="7eb45ee1-563a-484e-a04a-4ad18f4416c9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="38e9f8c3-53cf-f8aa-5da9-4bbeff59b60a" executionId="dd1d5f6e-1cb4-4705-93dd-f789986cf715" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3a11fc29-6062-1f3c-13c5-c2ecb2818977" executionId="ca3401c8-f1db-42a5-925c-e61b1e139ff5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3d2df3b1-09f9-9a77-26c9-6c7b6d882f8b" executionId="bcf85752-45cb-496d-b4e7-85934ba5516d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a086287a-e541-fe3e-0828-42d6461fdd5d" executionId="ffa955fa-dadb-4dfb-bff0-a5bda49d0162" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5b558c79-4ca8-fee5-16d9-08cbe297452d" executionId="b3db7feb-9958-4706-9b67-fca3c82e420b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f1f4f1e4-2183-f807-e4ee-840e6d8d12aa" executionId="834b33d2-e475-40d8-80c0-135de4fca679" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Les résultats ne figurent pas dans une liste" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="Tous les résultats chargés" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="48" executed="48" passed="40" failed="8" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 5.0.0.0: Test execution started&#xD;
+Running all tests in C:\Users\bryan\RiderProjects\AspTemplate\tests\WebApi.Tests\bin\Debug\net10.0\WebApi.Tests.dll&#xD;
+   NUnit3TestExecutor discovered 48 of 48 NUnit test cases using Current Discovery mode, Non-Explicit run&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+     Warning:&#xD;
+     The component "Fluent Assertions" is governed by the rules defined in the Xceed License Agreement and&#xD;
+     the Xceed Fluent Assertions Community License. You may use Fluent Assertions free of charge for&#xD;
+     non-commercial use only. An active subscription is required to use Fluent Assertions for commercial use.&#xD;
+&#xD;
+     Please contact Xceed Sales mailto:sales@xceed.com to acquire a subscription at a very low cost.&#xD;
+&#xD;
+     A paid commercial license supports the development and continued increasing support of&#xD;
+     Fluent Assertions users under both commercial and community licenses. Help us&#xD;
+     keep Fluent Assertions at the forefront of unit testing.&#xD;
+&#xD;
+     For more information, visit https://xceed.com/products/unit-testing/fluent-assertions/&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application started. Press Ctrl+C to shut down.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Hosting environment: Test&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Content root path: C:\Users\bryan\RiderProjects\AspTemplate\src\WebApi&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 0 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 2 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 3 entities to in-memory store.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 4 entities to in-memory store.&#xD;
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]&#xD;
+      Failed to determine the https port for redirect.&#xD;
+info: Microsoft.EntityFrameworkCore.Update[30100]&#xD;
+      Saved 1 entities to in-memory store.&#xD;
+info: Microsoft.Hosting.Lifetime[0]&#xD;
+      Application is shutting down...&#xD;
+&#xD;
+NUnit Adapter 5.0.0.0: Test execution complete&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
