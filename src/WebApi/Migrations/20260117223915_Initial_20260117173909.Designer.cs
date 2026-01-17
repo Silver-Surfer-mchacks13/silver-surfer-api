@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebApi.Data;
@@ -11,9 +12,11 @@ using WebApi.Data;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260117223915_Initial_20260117173909")]
+    partial class Initial_20260117173909
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,11 +26,16 @@ namespace WebApi.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("WebApi.Models.ClickAgentAction", b =>
+            modelBuilder.Entity("WebApi.Models.AgentAction", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("ActionType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -59,66 +67,22 @@ namespace WebApi.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Target")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedAt");
-
-                    b.HasIndex("SessionId");
-
-                    b.ToTable("ClickAgentActions", "silver_surfers_main");
-                });
-
-            modelBuilder.Entity("WebApi.Models.CompleteAgentAction", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<string>("ErrorMessage")
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
-
-                    b.Property<string>("PageHtml")
-                        .HasMaxLength(50000)
-                        .HasColumnType("character varying(50000)");
-
-                    b.Property<string>("PageUrl")
-                        .IsRequired()
+                    b.Property<string>("Value")
                         .HasMaxLength(2000)
                         .HasColumnType("character varying(2000)");
 
-                    b.Property<string>("Reasoning")
-                        .IsRequired()
-                        .HasMaxLength(5000)
-                        .HasColumnType("character varying(5000)");
-
-                    b.Property<Guid>("SessionId")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("Success")
-                        .HasColumnType("boolean");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ActionType");
 
                     b.HasIndex("CreatedAt");
 
                     b.HasIndex("SessionId");
 
-                    b.ToTable("CompleteAgentActions", "silver_surfers_main");
+                    b.ToTable("AgentActions", "silver_surfers_main");
                 });
 
             modelBuilder.Entity("WebApi.Models.PasswordResetRequest", b =>
@@ -311,68 +275,10 @@ namespace WebApi.Migrations
                     b.ToTable("Users", "silver_surfers_main");
                 });
 
-            modelBuilder.Entity("WebApi.Models.WaitAgentAction", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ErrorMessage")
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
-
-                    b.Property<string>("PageHtml")
-                        .HasMaxLength(50000)
-                        .HasColumnType("character varying(50000)");
-
-                    b.Property<string>("PageUrl")
-                        .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)");
-
-                    b.Property<string>("Reasoning")
-                        .IsRequired()
-                        .HasMaxLength(5000)
-                        .HasColumnType("character varying(5000)");
-
-                    b.Property<Guid>("SessionId")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("Success")
-                        .HasColumnType("boolean");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedAt");
-
-                    b.HasIndex("SessionId");
-
-                    b.ToTable("WaitAgentActions", "silver_surfers_main");
-                });
-
-            modelBuilder.Entity("WebApi.Models.ClickAgentAction", b =>
+            modelBuilder.Entity("WebApi.Models.AgentAction", b =>
                 {
                     b.HasOne("WebApi.Models.TaskSession", "Session")
-                        .WithMany("ClickActions")
-                        .HasForeignKey("SessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Session");
-                });
-
-            modelBuilder.Entity("WebApi.Models.CompleteAgentAction", b =>
-                {
-                    b.HasOne("WebApi.Models.TaskSession", "Session")
-                        .WithMany("CompleteActions")
+                        .WithMany("Actions")
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -412,24 +318,9 @@ namespace WebApi.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WebApi.Models.WaitAgentAction", b =>
-                {
-                    b.HasOne("WebApi.Models.TaskSession", "Session")
-                        .WithMany("WaitActions")
-                        .HasForeignKey("SessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Session");
-                });
-
             modelBuilder.Entity("WebApi.Models.TaskSession", b =>
                 {
-                    b.Navigation("ClickActions");
-
-                    b.Navigation("CompleteActions");
-
-                    b.Navigation("WaitActions");
+                    b.Navigation("Actions");
                 });
 
             modelBuilder.Entity("WebApi.Models.User", b =>

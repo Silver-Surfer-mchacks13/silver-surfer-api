@@ -12,7 +12,9 @@ public class AppDbContext(
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<PasswordResetRequest> PasswordResetRequests { get; set; }
     public DbSet<TaskSession> TaskSessions { get; set; }
-    public DbSet<AgentAction> AgentActions { get; set; }
+    public DbSet<ClickAgentAction> ClickAgentActions { get; set; }
+    public DbSet<WaitAgentAction> WaitAgentActions { get; set; }
+    public DbSet<CompleteAgentAction> CompleteAgentActions { get; set; }
     public DbSet<SitePattern> SitePatterns { get; set; }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -131,11 +133,9 @@ public class AppDbContext(
         {
             entity.HasKey(e => e.Id);
             entity.HasIndex(e => e.UserId);
-            entity.HasIndex(e => e.Status);
             entity.HasIndex(e => e.CreatedAt);
             
-            entity.Property(e => e.Goal).IsRequired().HasMaxLength(1000);
-            entity.Property(e => e.Status).IsRequired().HasConversion<string>().HasMaxLength(20);
+            entity.Property(e => e.Title).IsRequired().HasMaxLength(1000);
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
             entity.Property(e => e.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
             
@@ -145,30 +145,71 @@ public class AppDbContext(
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.SetNull); // Set null if user is deleted
             
-            entity.HasMany(e => e.Actions)
-                .WithOne(e => e.Session)
-                .HasForeignKey(e => e.SessionId)
-                .OnDelete(DeleteBehavior.Cascade);
+            // Relationships to action tables are configured in their respective entity configurations
         });
         
-        modelBuilder.Entity<AgentAction>(entity =>
+        // ClickAgentAction configuration
+        modelBuilder.Entity<ClickAgentAction>(entity =>
         {
+            entity.ToTable("ClickAgentActions", "silver_surfers_main");
             entity.HasKey(e => e.Id);
             entity.HasIndex(e => e.SessionId);
-            entity.HasIndex(e => e.ActionType);
             entity.HasIndex(e => e.CreatedAt);
             
-            entity.Property(e => e.ActionType).IsRequired().HasMaxLength(50);
-            entity.Property(e => e.Target).HasMaxLength(500);
-            entity.Property(e => e.Value).HasMaxLength(2000);
+            entity.Property(e => e.Target).IsRequired().HasMaxLength(500);
             entity.Property(e => e.Reasoning).IsRequired().HasMaxLength(5000);
             entity.Property(e => e.ErrorMessage).HasMaxLength(1000);
             entity.Property(e => e.PageUrl).IsRequired().HasMaxLength(2000);
-            entity.Property(e => e.PageHtml).HasMaxLength(50000); // Truncated HTML
+            entity.Property(e => e.PageHtml).HasMaxLength(50000);
+            entity.Property(e => e.Success).IsRequired();
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
             
             entity.HasOne(e => e.Session)
-                .WithMany(e => e.Actions)
+                .WithMany(e => e.ClickActions)
+                .HasForeignKey(e => e.SessionId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // WaitAgentAction configuration
+        modelBuilder.Entity<WaitAgentAction>(entity =>
+        {
+            entity.ToTable("WaitAgentActions", "silver_surfers_main");
+            entity.HasKey(e => e.Id);
+            entity.HasIndex(e => e.SessionId);
+            entity.HasIndex(e => e.CreatedAt);
+            
+            entity.Property(e => e.Duration).IsRequired();
+            entity.Property(e => e.Reasoning).IsRequired().HasMaxLength(5000);
+            entity.Property(e => e.ErrorMessage).HasMaxLength(1000);
+            entity.Property(e => e.PageUrl).IsRequired().HasMaxLength(2000);
+            entity.Property(e => e.PageHtml).HasMaxLength(50000);
+            entity.Property(e => e.Success).IsRequired();
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            
+            entity.HasOne(e => e.Session)
+                .WithMany(e => e.WaitActions)
+                .HasForeignKey(e => e.SessionId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // CompleteAgentAction configuration
+        modelBuilder.Entity<CompleteAgentAction>(entity =>
+        {
+            entity.ToTable("CompleteAgentActions", "silver_surfers_main");
+            entity.HasKey(e => e.Id);
+            entity.HasIndex(e => e.SessionId);
+            entity.HasIndex(e => e.CreatedAt);
+            
+            entity.Property(e => e.Message).IsRequired().HasMaxLength(1000);
+            entity.Property(e => e.Reasoning).IsRequired().HasMaxLength(5000);
+            entity.Property(e => e.ErrorMessage).HasMaxLength(1000);
+            entity.Property(e => e.PageUrl).IsRequired().HasMaxLength(2000);
+            entity.Property(e => e.PageHtml).HasMaxLength(50000);
+            entity.Property(e => e.Success).IsRequired();
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            
+            entity.HasOne(e => e.Session)
+                .WithMany(e => e.CompleteActions)
                 .HasForeignKey(e => e.SessionId)
                 .OnDelete(DeleteBehavior.Cascade);
         });

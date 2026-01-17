@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.ChatCompletion;
 using WebApi.Data;
 using WebApi.Models;
+using WebApi.Services.Agent;
 using WebApi.Tests.Helpers;
 
 namespace WebApi.Tests;
@@ -33,9 +36,15 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
         builder.ConfigureAppConfiguration((context, config) =>
         {
             // Override connection string to signal test mode
+            // Add test Gemini options to prevent validation errors
             config.AddInMemoryCollection(new Dictionary<string, string?>
             {
-                ["ConnectionStrings:DefaultConnection"] = "InMemory"
+                ["ConnectionStrings:DefaultConnection"] = "InMemory",
+                ["Gemini:ProjectId"] = "test-project",
+                ["Gemini:Location"] = "us-central1",
+                ["Gemini:Model"] = "gemini-2.0-flash",
+                ["Gemini:MaxTokens"] = "8192",
+                ["Gemini:Temperature"] = "0.7"
             });
         });
         
@@ -77,6 +86,35 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
                     options.DefaultUserId = _testUserId;
                 });
             }
+
+            // Mock the Vertex AI chat completion service for testing
+            // Remove the real service registration
+            var vertexAIServiceDescriptor = services.SingleOrDefault(
+                d => d.ServiceType == typeof(VertexAIChatCompletionService));
+            if (vertexAIServiceDescriptor != null)
+            {
+                services.Remove(vertexAIServiceDescriptor);
+            }
+
+            // Remove the Kernel registration that depends on VertexAIChatCompletionService
+            var kernelDescriptor = services.SingleOrDefault(
+                d => d.ServiceType == typeof(Kernel));
+            if (kernelDescriptor != null)
+            {
+                services.Remove(kernelDescriptor);
+            }
+
+            // Register mock chat completion service
+            services.AddSingleton<IChatCompletionService, MockChatCompletionService>();
+
+            // Re-register Kernel with mock service
+            services.AddScoped<Kernel>(sp =>
+            {
+                var kernelBuilder = Kernel.CreateBuilder();
+                var chatCompletionService = sp.GetRequiredService<IChatCompletionService>();
+                kernelBuilder.Services.AddSingleton(chatCompletionService);
+                return kernelBuilder.Build();
+            });
         });
     }
     

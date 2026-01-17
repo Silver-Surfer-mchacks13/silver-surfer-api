@@ -32,80 +32,69 @@ public class AgentController : ControllerBase
     }
 
     /// <summary>
-    /// Create a new conversation session and get initial actions
+    /// Process a conversation request - creates new conversation if SessionId is omitted, otherwise continues existing conversation
     /// </summary>
-    /// <param name="request">The request containing user goal and initial page state</param>
+    /// <param name="request">The request containing page state and optional session ID. The session_id field is optional: omit it to create a new conversation, or provide it to continue an existing conversation.</param>
     /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>Agent response with session ID and initial actions</returns>
+    /// <returns>Agent response with session ID and actions</returns>
+    /// <remarks>
+    /// Request: The session_id field in the request body is optional. When omitted, a new conversation session is created. When provided, the request continues the existing conversation.
+    /// 
+    /// Response Actions Schema: The response contains an array of actions. Each action has an "action_type" discriminator field that determines the action type. The possible action types are:
+    /// 
+    /// • click: Click an element on the page using an XPath expression.
+    /// 
+    ///   <code>
+    ///   {
+    ///     "action_type": "click",
+    ///     "x_path": "string (XPath expression, required, 1-500 chars)",
+    ///     "reasoning": "string (optional)"
+    ///   }
+    ///   </code>
+    /// 
+    ///   XPath examples: '//button[@id=""submit""]', '//a[@href=""/login""]', '//input[@type=""text"" and @name=""email""]'
+    /// 
+    /// • wait: Wait for a specified number of seconds.
+    /// 
+    ///   <code>
+    ///   {
+    ///     "action_type": "wait",
+    ///     "duration": "integer (required, 0-300 seconds)",
+    ///     "reasoning": "string (optional)"
+    ///   }
+    ///   </code>
+    /// 
+    /// • message: Display a message to the user (non-terminal - frontend continues sending requests).
+    /// 
+    ///   <code>
+    ///   {
+    ///     "action_type": "message",
+    ///     "message": "string (required, 1-1000 chars)",
+    ///     "reasoning": "string (optional)"
+    ///   }
+    ///   </code>
+    /// 
+    /// • complete: Mark the task as complete (terminal - frontend stops sending requests).
+    /// 
+    ///   <code>
+    ///   {
+    ///     "action_type": "complete",
+    ///     "message": "string (required, 1-1000 chars)",
+    ///     "reasoning": "string (optional)"
+    ///   }
+    ///   </code>
+    /// </remarks>
     /// <response code="200">Returns the agent response with session ID and actions</response>
-    /// <response code="400">Invalid request data</response>
+    /// <response code="400">Invalid request data or session is completed</response>
+    /// <response code="404">Session not found (when SessionId is provided)</response>
     /// <response code="500">Internal server error</response>
     [HttpPost("conversations")]
     [ProducesResponseType(typeof(AgentResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<AgentResponse>> CreateConversation(
-        [FromBody] CreateConversationRequest request,
-        CancellationToken cancellationToken)
-    {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(new ErrorResponse
-            {
-                Message = "Invalid request data",
-                Errors = ModelState.ToDictionary(
-                    kvp => kvp.Key,
-                    kvp => kvp.Value?.Errors.Select(e => e.ErrorMessage).ToArray() ?? Array.Empty<string>())
-            });
-        }
-
-        _logger.LogInformation(
-            "Creating new conversation. Goal: {Goal}, Url: {Url}",
-            request.UserGoal,
-            request.PageState.Url);
-
-        try
-        {
-            var response = await _agentService.CreateConversationAsync(request, cancellationToken);
-
-            _logger.LogInformation(
-                "Conversation created. SessionId: {SessionId}, Actions: {ActionCount}, Complete: {Complete}",
-                response.SessionId,
-                response.Actions.Count,
-                response.Complete);
-
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error creating conversation");
-            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
-            {
-                Message = "Failed to create conversation",
-                ErrorCode = "CONVERSATION_CREATE_FAILED"
-            });
-        }
-    }
-
-    /// <summary>
-    /// Continue an existing conversation and get next actions
-    /// </summary>
-    /// <param name="sessionId">The conversation session ID</param>
-    /// <param name="request">The request containing current page state (URL and HTML)</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>Agent response with next actions</returns>
-    /// <response code="200">Returns the agent response with actions</response>
-    /// <response code="400">Invalid request data or session is completed/failed</response>
-    /// <response code="404">Session not found</response>
-    /// <response code="500">Internal server error</response>
-    [HttpPost("conversations/{sessionId}/continue")]
-    [ProducesResponseType(typeof(AgentResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<AgentResponse>> ContinueConversation(
-        [FromRoute] Guid sessionId,
-        [FromBody] ContinueConversationRequest request,
+    public async Task<ActionResult<AgentResponse>> ProcessConversation(
+        [FromBody] ConversationRequest request,
         CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
@@ -120,25 +109,35 @@ public class AgentController : ControllerBase
         }
 
         _logger.LogInformation(
-            "Continuing conversation. SessionId: {SessionId}, Url: {Url}",
-            sessionId,
+            "Processing conversation request. SessionId: {SessionId}, Title: {Title}, Url: {Url}",
+            request.SessionId,
+            request.Title,
             request.PageState.Url);
 
         try
         {
-            var response = await _agentService.ContinueConversationAsync(sessionId, request, cancellationToken);
+            var response = await _agentService.ProcessConversationRequestAsync(request, cancellationToken);
 
             _logger.LogInformation(
-                "Conversation continued. SessionId: {SessionId}, Actions: {ActionCount}, Complete: {Complete}",
+                "Conversation processed. SessionId: {SessionId}, Actions: {ActionCount}, Complete: {Complete}",
                 response.SessionId,
                 response.Actions.Count,
                 response.Complete);
 
             return Ok(response);
+        }
+        catch (ArgumentException ex)
+        {
+            _logger.LogWarning(ex, "Invalid conversation request: {Message}", ex.Message);
+            return BadRequest(new ErrorResponse
+            {
+                Message = ex.Message,
+                ErrorCode = "INVALID_REQUEST"
+            });
         }
         catch (NotFoundException ex)
         {
-            _logger.LogWarning(ex, "Conversation session not found: {SessionId}", sessionId);
+            _logger.LogWarning(ex, "Conversation session not found: {Message}", ex.Message);
             return NotFound(new ErrorResponse
             {
                 Message = ex.Message,
@@ -147,7 +146,7 @@ public class AgentController : ControllerBase
         }
         catch (InvalidOperationException ex)
         {
-            _logger.LogWarning(ex, "Invalid operation for session {SessionId}: {Message}", sessionId, ex.Message);
+            _logger.LogWarning(ex, "Invalid operation: {Message}", ex.Message);
             return BadRequest(new ErrorResponse
             {
                 Message = ex.Message,
@@ -156,11 +155,11 @@ public class AgentController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error continuing conversation");
+            _logger.LogError(ex, "Error processing conversation");
             return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
             {
-                Message = "Failed to continue conversation",
-                ErrorCode = "CONVERSATION_CONTINUE_FAILED"
+                Message = "Failed to process conversation",
+                ErrorCode = "CONVERSATION_PROCESSING_FAILED"
             });
         }
     }

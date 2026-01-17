@@ -4,52 +4,24 @@ using System.ComponentModel;
 namespace WebApi.Services.Agent;
 
 /// <summary>
-/// Semantic Kernel plugin containing browser automation functions for the AI agent
+/// Semantic Kernel plugin containing browser automation functions for the AI agent (MVP: click, wait, complete)
 /// </summary>
 public class BrowserPlugin
 {
     /// <summary>
-    /// Clicks an element on the page using a CSS selector
+    /// Clicks an element on the page using an XPath expression
     /// </summary>
     [KernelFunction]
-    [Description("Clicks an element on the page. Use this when you need to interact with buttons, links, or other clickable elements. Provide the CSS selector (e.g., '#login-button', '.submit-btn', 'button[type=\"submit\"]').")]
+    [Description("Clicks an element on the page. Use this when you need to interact with buttons, links, or other clickable elements. Provide the XPath expression (e.g., '//button[@id=\"login-button\"]', '//div[@class=\"submit-btn\"]', '//button[@type=\"submit\"]').")]
     public string ClickElement(
-        [Description("CSS selector for the element to click (e.g., '#login', 'button.submit', 'a[href=\"/login\"]')")]
-        string selector,
+        [Description("XPath expression for the element to click (e.g., '//button[@id=\"login\"]', '//a[@href=\"/login\"]', '//input[@type=\"submit\"]')")]
+        string xpath,
         [Description("Brief explanation of why this element is being clicked")]
         string reasoning)
     {
-        return $"Action: click, Target: {selector}, Reasoning: {reasoning}";
-    }
-
-    /// <summary>
-    /// Types text into an input field
-    /// </summary>
-    [KernelFunction]
-    [Description("Types text into an input field, textarea, or other text input element. Use this for entering usernames, passwords, search terms, or any text input. Provide the CSS selector and the text to type.")]
-    public string TypeText(
-        [Description("CSS selector for the input field (e.g., '#email', 'input[name=\"username\"]', '#password')")]
-        string selector,
-        [Description("The text to type into the field")]
-        string text,
-        [Description("Brief explanation of why this text is being entered")]
-        string reasoning)
-    {
-        return $"Action: type, Target: {selector}, Value: {text}, Reasoning: {reasoning}";
-    }
-
-    /// <summary>
-    /// Navigates to a different URL
-    /// </summary>
-    [KernelFunction]
-    [Description("Navigates the browser to a different URL. Use this when you need to go to a different page or website. Provide the full URL or relative path.")]
-    public string Navigate(
-        [Description("The URL to navigate to (e.g., 'https://example.com/login', '/dashboard', 'https://payments.example.com')")]
-        string url,
-        [Description("Brief explanation of why navigation is needed")]
-        string reasoning)
-    {
-        return $"Action: navigate, Target: {url}, Reasoning: {reasoning}";
+        // Function executed - return value is used by Semantic Kernel for function calling flow
+        // The actual action extraction happens from the function call metadata
+        return $"Clicked element: {xpath}";
     }
 
     /// <summary>
@@ -63,32 +35,33 @@ public class BrowserPlugin
         [Description("Brief explanation of why waiting is necessary")]
         string reasoning)
     {
-        return $"Action: wait, Duration: {seconds}, Reasoning: {reasoning}";
+        // Function executed - return value is used by Semantic Kernel for function calling flow
+        return $"Waiting {seconds} seconds";
     }
 
     /// <summary>
-    /// Scrolls the page in a direction
+    /// Displays a message to the user (non-terminal - frontend should continue sending requests)
     /// </summary>
     [KernelFunction]
-    [Description("Scrolls the page up or down. Use this when you need to see content that is not currently visible on the page. Direction should be 'up' or 'down'.")]
-    public string Scroll(
-        [Description("Direction to scroll: 'up' or 'down'")]
-        string direction,
-        [Description("Brief explanation of why scrolling is needed")]
-        string reasoning)
+    [Description("Displays a message to the user. Use this when you need to communicate information, ask for clarification, or provide status updates. The frontend will display this message but continue processing. This is different from Complete which stops the conversation.")]
+    public string Message(
+        [Description("Message to display to the user")]
+        string message)
     {
-        return $"Action: scroll, Target: {direction}, Reasoning: {reasoning}";
+        // Function executed - return value is used by Semantic Kernel for function calling flow
+        return $"Message: {message}";
     }
 
     /// <summary>
-    /// Marks the task as complete
+    /// Marks the task as complete (terminal - frontend should stop sending requests)
     /// </summary>
     [KernelFunction]
-    [Description("Marks the current task as complete. Use this when the user's goal has been successfully achieved. Provide a brief message summarizing what was accomplished.")]
+    [Description("Marks the current task as complete. Use this when the user's goal has been successfully achieved. This stops the conversation - the frontend will not send any more requests. Provide a brief message summarizing what was accomplished.")]
     public string Complete(
         [Description("Brief message summarizing what was accomplished")]
         string message)
     {
-        return $"Action: complete, Reasoning: {message}";
+        // Function executed - return value is used by Semantic Kernel for function calling flow
+        return $"Task completed: {message}";
     }
 }

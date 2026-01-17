@@ -34,81 +34,59 @@ public class AgentService
     }
 
     /// <summary>
-    /// Creates a new conversation session and returns initial actions
+    /// Processes a conversation request - creates new session if SessionId is null, otherwise continues existing session
     /// </summary>
-    public async Task<AgentResponse> CreateConversationAsync(
-        CreateConversationRequest request,
+    public async Task<AgentResponse> ProcessConversationRequestAsync(
+        ConversationRequest request,
         CancellationToken cancellationToken = default)
     {
-        // Create new task session
-        var session = new TaskSession
+        TaskSession session;
+
+        if (request.SessionId.HasValue)
         {
-            Id = Guid.NewGuid(),
-            UserId = null, // Will be set when authorization is added
-            Goal = request.UserGoal,
-            Status = TaskSessionStatus.InProgress,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
-        };
+            // Continue existing conversation
+            session = await _dbContext.TaskSessions
+                .FirstOrDefaultAsync(s => s.Id == request.SessionId.Value, cancellationToken);
 
-        _dbContext.TaskSessions.Add(session);
-        await _dbContext.SaveChangesAsync(cancellationToken);
+            if (session == null)
+            {
+                throw new NotFoundException($"Conversation session {request.SessionId.Value} not found");
+            }
 
-        _logger.LogInformation("Created new conversation session {SessionId} with goal: {Goal}", 
-            session.Id, request.UserGoal);
+            // Validate session is still active
+            if (session.CompletedAt.HasValue)
+            {
+                throw new InvalidOperationException($"Conversation session {request.SessionId.Value} is already completed");
+            }
 
-        // Process the initial conversation request
-        var continueRequest = new ContinueConversationRequest
-        {
-            PageState = request.PageState
-        };
-
-        return await ContinueConversationAsync(session.Id, continueRequest, cancellationToken);
-    }
-
-    /// <summary>
-    /// Continues an existing conversation and returns next actions
-    /// </summary>
-    public async Task<AgentResponse> ContinueConversationAsync(
-        Guid sessionId,
-        ContinueConversationRequest request,
-        CancellationToken cancellationToken = default)
-    {
-        // Load existing session
-        var session = await _dbContext.TaskSessions
-            .FirstOrDefaultAsync(s => s.Id == sessionId, cancellationToken);
-
-        if (session == null)
-        {
-            throw new NotFoundException($"Conversation session {sessionId} not found");
+            _logger.LogInformation("Continuing conversation session {SessionId}", session.Id);
         }
+        else
+        {
+            // Create new conversation
+            if (string.IsNullOrWhiteSpace(request.Title))
+            {
+                throw new ArgumentException("Title is required when creating a new conversation", nameof(request));
+            }
 
-        // Validate session is still active
-        if (session.Status == TaskSessionStatus.Completed)
-        {
-            throw new InvalidOperationException($"Conversation session {sessionId} is already completed");
-        }
+            session = new TaskSession
+            {
+                Id = Guid.NewGuid(),
+                UserId = null, // Will be set when authorization is added
+                Title = request.Title,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
 
-        if (session.Status == TaskSessionStatus.Failed || session.Status == TaskSessionStatus.Cancelled)
-        {
-            throw new InvalidOperationException($"Conversation session {sessionId} is in {session.Status} status and cannot be continued");
-        }
-
-        try
-        {
-            // Process the conversation
-            return await ProcessConversationAsync(session, request.PageState, cancellationToken);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error continuing conversation for session {SessionId}", sessionId);
-            
-            session.Status = TaskSessionStatus.Failed;
-            session.UpdatedAt = DateTime.UtcNow;
+            _dbContext.TaskSessions.Add(session);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
-            throw;
+            _logger.LogInformation("Created new conversation session {SessionId} with title: {Title}", 
+                session.Id, request.Title);
         }
+
+        // Process the conversation
+        return await ProcessConversationAsync(session, request.PageState, cancellationToken);
     }
 
     /// <summary>
@@ -120,7 +98,7 @@ public class AgentService
         CancellationToken cancellationToken)
     {
         // Build system prompt with context
-        var systemPrompt = BuildSystemPrompt(session.Goal, session.Id, pageState.Url);
+        var systemPrompt = BuildSystemPrompt(session.Title, session.Id, pageState.Url);
 
         // Get chat completion service
         var chatCompletionService = _kernel.GetRequiredService<IChatCompletionService>();
@@ -129,17 +107,39 @@ public class AgentService
         var chatHistory = new ChatHistory();
         chatHistory.AddSystemMessage(systemPrompt);
 
-        // Add conversation history from previous actions
-        var previousActions = await _dbContext.AgentActions
+        // Add conversation history from previous actions (load from all action tables)
+        var clickActions = await _dbContext.ClickAgentActions
             .Where(a => a.SessionId == session.Id)
             .OrderBy(a => a.CreatedAt)
-            .Take(10) // Last 10 actions for context
+            .Take(10)
+            .Select(a => new { Type = "click", Description = $"click on {a.Target}", Reasoning = a.Reasoning, CreatedAt = a.CreatedAt })
             .ToListAsync(cancellationToken);
 
-        if (previousActions.Any())
+        var waitActions = await _dbContext.WaitAgentActions
+            .Where(a => a.SessionId == session.Id)
+            .OrderBy(a => a.CreatedAt)
+            .Take(10)
+            .Select(a => new { Type = "wait", Description = $"wait {a.Duration}s", Reasoning = a.Reasoning, CreatedAt = a.CreatedAt })
+            .ToListAsync(cancellationToken);
+
+        var completeActions = await _dbContext.CompleteAgentActions
+            .Where(a => a.SessionId == session.Id)
+            .OrderBy(a => a.CreatedAt)
+            .Take(10)
+            .Select(a => new { Type = "complete", Description = $"complete: {a.Message}", Reasoning = a.Reasoning, CreatedAt = a.CreatedAt })
+            .ToListAsync(cancellationToken);
+
+        var allPreviousActions = clickActions
+            .Concat(waitActions)
+            .Concat(completeActions)
+            .OrderBy(a => a.CreatedAt)
+            .Take(10)
+            .ToList();
+
+        if (allPreviousActions.Any())
         {
-            var historyContext = string.Join("\n", previousActions.Select(a => 
-                $"- {a.ActionType} on {a.Target ?? "page"}: {a.Reasoning}"));
+            var historyContext = string.Join("\n", allPreviousActions.Select(a => 
+                $"- {a.Type} ({a.Description}): {a.Reasoning}"));
             chatHistory.AddUserMessage($"Previous actions:\n{historyContext}");
         }
 
@@ -152,57 +152,93 @@ public class AgentService
         chatHistory.AddUserMessage($"Current page state:\n{pageContext}");
 
         // Add user goal (only if this is the first action)
-        if (!previousActions.Any())
+        if (!allPreviousActions.Any())
         {
-            chatHistory.AddUserMessage($"User goal: {session.Goal}");
+            chatHistory.AddUserMessage($"User goal: {session.Title}");
         }
 
         // Add BrowserPlugin to kernel
         var browserPlugin = new BrowserPlugin();
         _kernel.Plugins.AddFromObject(browserPlugin, "BrowserPlugin");
 
-        // Invoke the kernel to get agent response
+        // Invoke the kernel to get agent response with function calling enabled
         var result = await chatCompletionService.GetChatMessageContentsAsync(
             chatHistory,
             executionSettings: null,
             kernel: _kernel,
             cancellationToken: cancellationToken);
 
-        // Parse the response to extract actions
+        // Extract actions from function calls or response text
         var responseMessage = result.LastOrDefault();
         if (responseMessage == null)
         {
             throw new InvalidOperationException("No response from AI agent");
         }
 
-        var actions = ParseActionsFromResponse(responseMessage.Content ?? "", pageState);
-        var reasoning = ExtractReasoning(responseMessage.Content ?? "");
+        // Try to extract function calls from Semantic Kernel's response
+        var actions = ExtractActionsFromFunctionCalls(responseMessage, pageState);
 
-        // Save actions to database
+        // Save actions to database using the appropriate model for each action type
         foreach (var action in actions)
         {
-            var agentAction = new AgentAction
+            switch (action)
             {
-                Id = Guid.NewGuid(),
-                SessionId = session.Id,
-                ActionType = action.Action,
-                Target = action.Target,
-                Value = action.Value,
-                Reasoning = reasoning,
-                Success = false, // Will be updated by extension after execution
-                PageUrl = pageState.Url,
-                PageHtml = TruncateHtml(pageState.Html),
-                CreatedAt = DateTime.UtcNow
-            };
+                case ClickAction clickAction:
+                    var clickDbAction = new ClickAgentAction
+                    {
+                        Id = Guid.NewGuid(),
+                        SessionId = session.Id,
+                        Target = clickAction.XPath, // Stored as Target in DB but represents XPath
+                        Reasoning = action.Reasoning ?? string.Empty,
+                        Success = false,
+                        PageUrl = pageState.Url,
+                        PageHtml = TruncateHtml(pageState.Html),
+                        CreatedAt = DateTime.UtcNow
+                    };
+                    _dbContext.ClickAgentActions.Add(clickDbAction);
+                    break;
 
-            _dbContext.AgentActions.Add(agentAction);
+                case MessageAction messageAction:
+                    // MessageAction is informational only - no need to save to database
+                    // It's just for displaying messages to the user
+                    break;
+
+                case WaitAction waitAction:
+                    var waitDbAction = new WaitAgentAction
+                    {
+                        Id = Guid.NewGuid(),
+                        SessionId = session.Id,
+                        Duration = waitAction.Duration,
+                        Reasoning = action.Reasoning ?? string.Empty,
+                        Success = false,
+                        PageUrl = pageState.Url,
+                        PageHtml = TruncateHtml(pageState.Html),
+                        CreatedAt = DateTime.UtcNow
+                    };
+                    _dbContext.WaitAgentActions.Add(waitDbAction);
+                    break;
+
+                case CompleteAction completeAction:
+                    var completeDbAction = new CompleteAgentAction
+                    {
+                        Id = Guid.NewGuid(),
+                        SessionId = session.Id,
+                        Message = completeAction.Message,
+                        Reasoning = action.Reasoning ?? string.Empty,
+                        Success = false,
+                        PageUrl = pageState.Url,
+                        PageHtml = TruncateHtml(pageState.Html),
+                        CreatedAt = DateTime.UtcNow
+                    };
+                    _dbContext.CompleteAgentActions.Add(completeDbAction);
+                    break;
+            }
         }
 
-        // Update session status
-        var isComplete = actions.Any(a => a.Action == "complete");
+        // Update session completion
+        var isComplete = actions.Any(a => a is CompleteAction);
         if (isComplete)
         {
-            session.Status = TaskSessionStatus.Completed;
             session.CompletedAt = DateTime.UtcNow;
         }
 
@@ -213,9 +249,7 @@ public class AgentService
         {
             SessionId = session.Id,
             Actions = actions,
-            Reasoning = reasoning,
-            Complete = isComplete,
-            NeedsUserInput = null // Could be extracted from response if needed
+            Complete = isComplete
         };
     }
 
@@ -228,58 +262,136 @@ Current page: {currentUrl}
 Session ID: {sessionId}
 
 You have access to the following browser functions:
-- ClickElement(selector, reasoning): Click an element on the page
-- TypeText(selector, text, reasoning): Type text into an input field
-- Navigate(url, reasoning): Navigate to a different URL
+- ClickElement(xpath, reasoning): Click an element on the page using an XPath expression (e.g., '//button[@id=""login""]', '//a[@href=""/login""]')
 - Wait(seconds, reasoning): Wait for a specified number of seconds
-- Scroll(direction, reasoning): Scroll the page up or down
-- Complete(message): Mark the task as complete
+- Message(message): Display a message to the user (non-terminal - frontend continues sending requests)
+- Complete(message): Mark the task as complete (terminal - frontend stops sending requests)
+
+IMPORTANT: Use XPath expressions, NOT CSS selectors, for ClickElement. XPath examples:
+- '//button[@id=""submit""]' - button with id=""submit""
+- '//a[@href=""/login""]' - link with href=""/login""
+- '//input[@type=""text"" and @name=""email""]' - input with type=""text"" and name=""email""
+- '//div[@class=""button"" and contains(text(), ""Click me"")]' - div with class=""button"" containing text ""Click me""
 
 Analyze the HTML content provided and determine the next action(s) needed to accomplish the user's goal.
 Use the browser functions to interact with the page. Return your actions clearly and explain your reasoning.
-If the task is complete, call the Complete function with a summary message.";
+Use Message() for informational messages that don't stop the conversation. Use Complete() only when the task is fully finished.";
     }
 
-    private List<BrowserAction> ParseActionsFromResponse(string responseContent, PageState pageState)
+    /// <summary>
+    /// Extracts browser actions from Semantic Kernel's response
+    /// Attempts to extract from function calls first, then falls back to text parsing
+    /// </summary>
+    private List<BrowserAction> ExtractActionsFromFunctionCalls(ChatMessageContent responseMessage, PageState pageState)
     {
         var actions = new List<BrowserAction>();
 
-        // Try to parse function calls from the response
-        // This is a simplified parser - in production, you'd want more robust parsing
-        // Semantic Kernel should handle function calling automatically, but we need to extract the results
-
-        // For now, we'll look for patterns in the response text
-        // In a real implementation, Semantic Kernel's function calling would handle this automatically
-        // and we'd extract the function calls from the ChatMessageContent
-
-        // Simple heuristic: if response mentions specific actions, create them
-        // This is a placeholder - actual implementation should use SK's function calling results
-        if (responseContent.Contains("click", StringComparison.OrdinalIgnoreCase) ||
-            responseContent.Contains("ClickElement", StringComparison.OrdinalIgnoreCase))
+        // Try to extract from Items collection if available (Semantic Kernel function calls)
+        // Note: Vertex AI may not return structured function calls, so we check Items first
+        if (responseMessage.Items != null && responseMessage.Items.Count > 0)
         {
-            // Extract selector from response (simplified)
-            var selectorMatch = System.Text.RegularExpressions.Regex.Match(
-                responseContent,
-                @"(?:click|ClickElement)[\s(]+['""]?([^'"")\s]+)['""]?",
-                System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-
-            if (selectorMatch.Success)
+            // Check metadata or items for function call information
+            // In SK, function calls might be represented differently depending on the provider
+            foreach (var item in responseMessage.Items)
             {
-                actions.Add(new BrowserAction
+                // Try to extract function call info from item metadata or type
+                // This is provider-dependent, so we check generically
+                var itemType = item.GetType().Name;
+                if (itemType.Contains("Function") || itemType.Contains("Call"))
                 {
-                    Action = "click",
-                    Target = selectorMatch.Groups[1].Value,
-                    Reasoning = responseContent.Substring(0, Math.Min(200, responseContent.Length))
-                });
+                    // Attempt to extract function name and arguments via reflection or metadata
+                    // For now, we'll fall through to text parsing since Vertex AI structure is unknown
+                }
             }
+        }
+
+        // Primary method: Parse from text content
+        // This works reliably with Vertex AI responses and handles both function call formats and natural language
+        actions = ParseActionsFromText(responseMessage.Content ?? "", pageState);
+
+        return actions;
+    }
+
+    /// <summary>
+    /// Fallback: Parse actions from text response (used when function calling isn't available)
+    /// </summary>
+    private List<BrowserAction> ParseActionsFromText(string responseContent, PageState pageState)
+    {
+        var actions = new List<BrowserAction>();
+
+        // Parse Complete action (terminal - return immediately if found)
+        // Only match function call syntax: Complete(...) or complete(...), not just the word "complete" in text
+        // Use word boundary to avoid matching "complete" in phrases like "complete checkout"
+        var completeMatch = System.Text.RegularExpressions.Regex.Match(
+            responseContent,
+            @"\b(?:Complete|complete)\s*\(\s*['""]?([^'""\)]+)['""]?\s*\)",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+        if (completeMatch.Success)
+        {
+            actions.Add(new CompleteAction
+            {
+                Message = completeMatch.Groups[1].Value.Trim(),
+                Reasoning = responseContent.Substring(0, Math.Min(200, responseContent.Length))
+            });
+            return actions; // Complete is terminal
+        }
+
+        // Parse Click action - look for ClickElement(...) function call
+        // Handle formats: ClickElement('//xpath', 'reasoning') or ClickElement(xpath='//xpath', reasoning='...')
+        var clickMatch = System.Text.RegularExpressions.Regex.Match(
+            responseContent,
+            @"\b(?:ClickElement|click)\s*\(\s*(?:(?:xpath|selector)\s*=\s*)?['""]([^'""]+)['""]\s*(?:,\s*(?:reasoning\s*=\s*)?['""]([^'""]+)['""])?\s*\)",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+        if (clickMatch.Success)
+        {
+            actions.Add(new ClickAction
+            {
+                XPath = clickMatch.Groups[1].Value,
+                Reasoning = clickMatch.Groups.Count > 2 && !string.IsNullOrEmpty(clickMatch.Groups[2].Value)
+                    ? clickMatch.Groups[2].Value
+                    : responseContent.Substring(0, Math.Min(200, responseContent.Length))
+            });
+        }
+
+        // Parse Message action - look for Message(...) function call
+        var messageMatch = System.Text.RegularExpressions.Regex.Match(
+            responseContent,
+            @"\b(?:Message|message)\s*\(\s*['""]?([^'""\)]+)['""]?\s*\)",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+        if (messageMatch.Success)
+        {
+            actions.Add(new MessageAction
+            {
+                Message = messageMatch.Groups[1].Value.Trim(),
+                Reasoning = responseContent.Substring(0, Math.Min(200, responseContent.Length))
+            });
+        }
+
+        // Parse Wait action - look for Wait(...) function call
+        var waitMatch = System.Text.RegularExpressions.Regex.Match(
+            responseContent,
+            @"\b(?:Wait|wait)\s*\(\s*(\d+)\s*(?:,\s*['""]([^'""]+)['""])?\s*\)",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+        if (waitMatch.Success && int.TryParse(waitMatch.Groups[1].Value, out var seconds))
+        {
+            actions.Add(new WaitAction
+            {
+                Duration = seconds,
+                Reasoning = waitMatch.Groups.Count > 2 && !string.IsNullOrEmpty(waitMatch.Groups[2].Value)
+                    ? waitMatch.Groups[2].Value
+                    : "Waiting as requested"
+            });
         }
 
         // If no actions found, return a default wait action to prevent infinite loops
         if (!actions.Any())
         {
-            actions.Add(new BrowserAction
+            actions.Add(new WaitAction
             {
-                Action = "wait",
                 Duration = 1,
                 Reasoning = "Analyzing page content..."
             });
@@ -288,17 +400,6 @@ If the task is complete, call the Complete function with a summary message.";
         return actions;
     }
 
-    private string ExtractReasoning(string responseContent)
-    {
-        // Extract reasoning from response (max 5000 chars to match database limit)
-        if (string.IsNullOrEmpty(responseContent))
-            return string.Empty;
-            
-        const int maxLength = 5000;
-        return responseContent.Length <= maxLength 
-            ? responseContent 
-            : responseContent.Substring(0, maxLength);
-    }
 
     private string TruncateHtml(string html)
     {

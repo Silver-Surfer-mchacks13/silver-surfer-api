@@ -27,4 +27,10 @@
     <ProjectReference Include="..\..\src\WebApi\WebApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="data\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

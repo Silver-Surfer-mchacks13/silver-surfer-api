@@ -3,10 +3,19 @@ using Web.Common.DTOs.Agent;
 
 namespace WebApi.Validators;
 
-public class ContinueConversationRequestValidator : AbstractValidator<ContinueConversationRequest>
+/// <summary>
+/// Validates ConversationRequest using FluentValidation
+/// </summary>
+public class ConversationRequestValidator : AbstractValidator<ConversationRequest>
 {
-    public ContinueConversationRequestValidator()
+    public ConversationRequestValidator()
     {
+        // Title is required only when creating a new conversation (SessionId is null)
+        RuleFor(x => x.Title)
+            .NotEmpty().WithMessage("Title is required when creating a new conversation")
+            .MaximumLength(1000).WithMessage("Title must not exceed 1000 characters")
+            .When(x => !x.SessionId.HasValue);
+
         RuleFor(x => x.PageState)
             .NotNull().WithMessage("PageState is required");
 

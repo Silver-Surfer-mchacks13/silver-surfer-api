@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace WebApi.Models;
 
 /// <summary>
-/// Tracks each user task attempt (e.g., "pay electric bill", "book appointment")
+/// Represents a conversation session (like a chat conversation in modern LLM UIs)
 /// </summary>
 [SuppressMessage("ReSharper", "PropertyCanBeMadeInitOnly.Global")]
 [SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Global")]
@@ -16,29 +16,24 @@ public class TaskSession
     /// </summary>
     public Guid? UserId { get; set; }
     
-    public required string Goal { get; set; }
-    
-    public TaskSessionStatus Status { get; set; } = TaskSessionStatus.InProgress;
+    /// <summary>
+    /// Title of the conversation (e.g., "Pay electric bill", "Book appointment")
+    /// </summary>
+    public required string Title { get; set; }
     
     public DateTime CreatedAt { get; set; }
     
     public DateTime UpdatedAt { get; set; }
     
+    /// <summary>
+    /// When the conversation was completed (null if still active)
+    /// </summary>
     public DateTime? CompletedAt { get; set; }
     
     // Navigation properties
     public User? User { get; set; }
     
-    public ICollection<AgentAction> Actions { get; set; } = new List<AgentAction>();
-}
-
-/// <summary>
-/// Status of a task session
-/// </summary>
-public enum TaskSessionStatus
-{
-    InProgress,
-    Completed,
-    Failed,
-    Cancelled
+    public ICollection<ClickAgentAction> ClickActions { get; set; } = new List<ClickAgentAction>();
+    public ICollection<WaitAgentAction> WaitActions { get; set; } = new List<WaitAgentAction>();
+    public ICollection<CompleteAgentAction> CompleteActions { get; set; } = new List<CompleteAgentAction>();
 }
