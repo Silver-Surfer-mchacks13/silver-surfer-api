@@ -102,3 +102,14 @@ variable "oauth_github_client_secret" {
   sensitive   = true
   default     = ""
 }
+
+########################################
+# Gemini / Vertex AI configuration
+########################################
+
+variable "gemini_project_id" {
+  description = "GCP Project ID for Gemini/Vertex AI (can be different from main project)"
+  type        = string
+  sensitive   = false
+  default     = ""
+}

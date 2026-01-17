@@ -55,6 +55,9 @@
     
     <!-- security -->
     <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.21.0" />
+    
+    <!-- Vertex AI / Gemini -->
+    <PackageReference Include="Google.Cloud.AIPlatform.V1" Version="3.20.0" />
   </ItemGroup>
 
   <ItemGroup>

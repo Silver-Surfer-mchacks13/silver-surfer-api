@@ -35,6 +35,7 @@ builder.Services.ConfigureResponseCompression(builder.Environment);
 builder.Services.ConfigureResponseCaching(builder.Environment);
 builder.Services.ConfigureOpenTelemetry(builder.Configuration, builder.Logging, builder.Environment);
 builder.Services.ConfigureAuthServices(builder.Configuration);
+builder.Services.ConfigureGemini(builder.Configuration);
 
 var app = builder.Build();
 

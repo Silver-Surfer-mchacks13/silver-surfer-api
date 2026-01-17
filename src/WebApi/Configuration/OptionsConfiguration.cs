@@ -51,12 +51,14 @@ public static class OptionsConfiguration
         services.AddSingleton<IValidator<EmailSettings>, EmailSettingsValidator>();
         services.AddSingleton<IValidator<FrontendSettings>, FrontendSettingsValidator>();
         services.AddSingleton<IValidator<RateLimitingSettings>, RateLimitingSettingsValidator>();
+        services.AddSingleton<IValidator<GeminiOptions>, GeminiOptionsValidator>();
         
         services.AddValidatedSettings<JwtSettings>(configuration);
         services.AddValidatedSettings<EmailSettings>(configuration);
         services.AddValidatedSettings<FrontendSettings>(configuration);
         services.AddValidatedSettings<RateLimitingSettings>(configuration);
         services.AddValidatedSettings<OAuthSettings>(configuration, hasValidator: false);
+        services.AddValidatedSettings<GeminiOptions>(configuration);
         
         // enable automatic FluentValidation for ASP.NET Core model binding
         services.AddFluentValidationAutoValidation();

@@ -1,4 +1,21 @@
 ########################################
+# Service Account for Cloud Run
+########################################
+
+resource "google_service_account" "webapi_sa" {
+  account_id   = "silver-surfer-webapi-sa"
+  display_name = "Silver Surfer WebApi Service Account"
+  description  = "Service account for Cloud Run WebApi service with Vertex AI access"
+}
+
+# Grant Vertex AI User role
+resource "google_project_iam_member" "webapi_vertex_ai_user" {
+  project = var.gcp_project_id
+  role    = "roles/aiplatform.user"
+  member  = "serviceAccount:${google_service_account.webapi_sa.email}"
+}
+
+########################################
 # Cloud Run Service: WebApi
 ########################################
 
@@ -12,6 +29,8 @@ resource "google_cloud_run_service" "silver-surfer-webapi" {
 
   template {
     spec {
+      service_account_name = google_service_account.webapi_sa.email
+
       containers {
         image = var.webapi_image != "" ? var.webapi_image : "gcr.io/${var.gcp_project_id}/silver-surfer-webapi:latest"
 
@@ -122,6 +141,15 @@ resource "google_cloud_run_service" "silver-surfer-webapi" {
           content {
             name  = "OAuth__GitHub__ClientSecret"
             value = var.oauth_github_client_secret
+          }
+        }
+
+        # Gemini / Vertex AI - Project ID
+        dynamic "env" {
+          for_each = var.gemini_project_id != "" ? [1] : []
+          content {
+            name  = "Gemini__ProjectId"
+            value = var.gemini_project_id
           }
         }
       }

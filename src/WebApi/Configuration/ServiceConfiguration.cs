@@ -368,6 +368,19 @@ public static class ServiceConfiguration
         services.AddTransient<IEmailService, RenderMjmlEmailService>(sp =>
             new RenderMjmlEmailService(sp.GetRequiredService<IResend>(), emailDomain));
     }
+
+    /// <summary>
+    /// Configures Gemini/Vertex AI service for web page analysis.
+    /// </summary>
+    /// <param name="services">The service collection to configure.</param>
+    /// <param name="configuration">The configuration instance to read Gemini settings from.</param>
+    public static void ConfigureGemini(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        services.AddHttpClient();
+        services.AddScoped<Services.Gemini.GeminiService>();
+    }
     
     /// <summary>
     /// Configures rate limiting for the application.
