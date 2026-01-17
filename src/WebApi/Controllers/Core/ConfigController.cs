@@ -21,6 +21,7 @@ public class ConfigController(
     public IActionResult GetCorsConfig()
     {
         // Use the exact same logic as Program.cs
+        var corsEnabled = ServiceConfiguration.IsCorsEnabled(configuration);
         var resolvedOrigins = ServiceConfiguration.GetCorsAllowedOrigins(configuration);
 
         // Check configuration key for debugging
@@ -28,6 +29,8 @@ public class ConfigController(
                              ?? Environment.GetEnvironmentVariable("Cors__AllowedOrigins");
 
         var corsOriginsArray = configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
+        var corsEnabledConfig = configuration.GetValue<bool?>("Cors:Enabled");
+        var corsEnabledEnvVar = Environment.GetEnvironmentVariable("Cors__Enabled");
 
         // Get all environment variables that start with "Cors" for debugging
         var allCorsEnvVars = Environment.GetEnvironmentVariables()
@@ -38,6 +41,9 @@ public class ConfigController(
         // Build response showing what we found
         var response = new
         {
+            corsEnabled = corsEnabled,
+            corsEnabledConfig = corsEnabledConfig,
+            corsEnabledEnvVar = corsEnabledEnvVar ?? "(not set)",
             corsOriginsString = corsOriginsString ?? "(null)",
             corsOriginsArray = corsOriginsArray ?? Array.Empty<string>(),
             corsOriginsArrayLength = corsOriginsArray?.Length ?? 0,
@@ -45,6 +51,7 @@ public class ConfigController(
             allCorsEnvironmentVariables = allCorsEnvVars,
             allConfigKeys = new
             {
+                corsEnabled = configuration["Cors:Enabled"] ?? "(null)",
                 corsAllowedOrigins = configuration["Cors__AllowedOrigins"] ?? "(null)",
             },
             resolvedOrigins = resolvedOrigins,

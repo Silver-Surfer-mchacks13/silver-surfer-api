@@ -29,6 +29,29 @@ namespace WebApi.Configuration;
 public static class ServiceConfiguration
 {
     /// <summary>
+    /// Checks if CORS is enabled from configuration.
+    /// Checks environment variable "Cors__Enabled" first, then configuration section "Cors:Enabled".
+    /// Defaults to true if not specified.
+    /// </summary>
+    internal static bool IsCorsEnabled(IConfiguration configuration)
+    {
+        // Check environment variable first
+        var corsEnabledString = configuration["Cors__Enabled"]
+                             ?? Environment.GetEnvironmentVariable("Cors__Enabled");
+
+        if (!string.IsNullOrWhiteSpace(corsEnabledString))
+        {
+            if (bool.TryParse(corsEnabledString, out var enabled))
+            {
+                return enabled;
+            }
+        }
+
+        // Fall back to appsettings.json
+        return configuration.GetValue<bool>("Cors:Enabled", true);
+    }
+
+    /// <summary>
     /// Resolves CORS allowed origins from configuration.
     /// If an environment variable is set, use it (comma-separated). Otherwise, fall back to `appsettings.json` array.
     /// </summary>
@@ -55,6 +78,9 @@ public static class ServiceConfiguration
     /// <param name="configuration">The configuration instance to read CORS settings from.</param>
     /// <remarks>
     /// <para>
+    /// CORS can be disabled by setting "Cors:Enabled" to false in appsettings.json or "Cors__Enabled" environment variable to "false".
+    /// </para>
+    /// <para>
     /// CORS origins are resolved from configuration in the following order:
     /// 1. Environment variable "Cors__AllowedOrigins" (comma-separated)
     /// 2. Configuration section "Cors:AllowedOrigins" (array)
@@ -68,6 +94,12 @@ public static class ServiceConfiguration
         this IServiceCollection services, 
         IConfiguration configuration)
     {
+        // Check if CORS is enabled
+        if (!IsCorsEnabled(configuration))
+        {
+            return; // CORS is disabled, don't configure it
+        }
+
         var corsOrigins = GetCorsAllowedOrigins(configuration);
         services.AddCors(options =>
         {

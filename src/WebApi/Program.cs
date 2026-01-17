@@ -85,7 +85,11 @@ if (app.Environment.IsProduction())
     app.UseResponseCaching();
 }
 
-app.UseCors();
+// Only use CORS if it's enabled in configuration
+if (ServiceConfiguration.IsCorsEnabled(app.Configuration))
+{
+    app.UseCors();
+}
 
 app.UseAuthentication();
 app.UseAuthorization();
