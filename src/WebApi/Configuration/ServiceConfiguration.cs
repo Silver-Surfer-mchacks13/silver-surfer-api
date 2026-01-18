@@ -705,6 +705,7 @@ public static class ServiceConfiguration
         jsonSerializerOptions.WriteIndented = true;
         jsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower;
         jsonSerializerOptions.PropertyNameCaseInsensitive = true;
+        jsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
     }
 }
 

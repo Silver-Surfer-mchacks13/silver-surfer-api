@@ -220,7 +220,7 @@ public class AgentService
         CancellationToken cancellationToken)
     {
         // Build system prompt with context
-        var systemPrompt = BuildSystemPrompt(session.Title, session.Id, pageState.Url);
+        var systemPrompt = BuildSystemPrompt(session.Title, session.Id, pageState.Url, pageState.FormatType);
 
         // Get chat completion service
         var chatCompletionService = _kernel.GetRequiredService<IChatCompletionService>();
@@ -279,8 +279,24 @@ public class AgentService
         // The AI can see what changed by comparing the current page state with previous actions
 
         // Add current page state
-        var pageContext = $"Current page URL: {pageState.Url}\n" +
+        string pageContext;
+        if (pageState.FormatType == PageFormatType.Html && !string.IsNullOrEmpty(pageState.Html))
+        {
+            pageContext = $"Current page URL: {pageState.Url}\n" +
                         $"HTML content (truncated): {pageState.Html.Substring(0, Math.Min(5000, pageState.Html.Length))}";
+        }
+        else if (pageState.FormatType == PageFormatType.StructuredJson && pageState.StructuredData != null)
+        {
+            // For now, pass structured data as JSON string (will be handled properly later)
+            var structuredJson = System.Text.Json.JsonSerializer.Serialize(pageState.StructuredData, new JsonSerializerOptions { WriteIndented = false });
+            pageContext = $"Current page URL: {pageState.Url}\n" +
+                        $"Structured page data: {structuredJson}";
+        }
+        else
+        {
+            pageContext = $"Current page URL: {pageState.Url}\n" +
+                        $"Page data format: {pageState.FormatType}";
+        }
         chatHistory.AddUserMessage($"Current page state:\n{pageContext}");
 
         // Add user goal (only if this is the first action)
@@ -421,7 +437,7 @@ public class AgentService
         };
     }
 
-    private string BuildSystemPrompt(string userGoal, Guid sessionId, string currentUrl)
+    private string BuildSystemPrompt(string userGoal, Guid sessionId, string currentUrl, PageFormatType formatType)
     {
         return $@"You are an AI assistant helping elderly users navigate websites step-by-step.
 
