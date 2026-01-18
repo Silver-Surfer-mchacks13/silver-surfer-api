@@ -338,9 +338,14 @@ Session ID: {sessionId}
 
 You have access to the following browser functions:
 - ClickElement(xpath, reasoning): Click an element on the page using an XPath expression (e.g., '//button[@id=""login""]', '//a[@href=""/login""]')
-- Wait(seconds, reasoning): Wait for a specified number of seconds
+- Wait(seconds, reasoning): ONLY use when absolutely necessary - when you need to wait for dynamic content to load after an action, animations to finish, or time-based delays. DO NOT use Wait for analyzing static page content - the HTML is already provided, analyze it directly.
 - Message(message): Display a message to the user (non-terminal - frontend continues sending requests)
 - Complete(message): Mark the task as complete (terminal - frontend stops sending requests)
+
+CRITICAL: DO NOT use Wait() as a default action. The page HTML is already provided to you - analyze it directly and take action. Only wait if:
+1. You've clicked something that triggers a loading state that requires time
+2. You need to wait for an animation to complete before the next action
+3. There's an explicit time-based requirement
 
 IMPORTANT: Use XPath expressions, NOT CSS selectors, for ClickElement. XPath examples:
 - '//button[@id=""submit""]' - button with id=""submit""
@@ -349,7 +354,7 @@ IMPORTANT: Use XPath expressions, NOT CSS selectors, for ClickElement. XPath exa
 - '//div[@class=""button"" and contains(text(), ""Click me"")]' - div with class=""button"" containing text ""Click me""
 
 Analyze the HTML content provided and determine the next action(s) needed to accomplish the user's goal.
-Use the browser functions to interact with the page. Return your actions clearly and explain your reasoning.
+The HTML is already loaded - analyze it directly and take action. Do not wait unnecessarily.
 Use Message() for informational messages that don't stop the conversation. Use Complete() only when the task is fully finished.";
     }
 
@@ -462,13 +467,14 @@ Use Message() for informational messages that don't stop the conversation. Use C
             });
         }
 
-        // If no actions found, return a default wait action to prevent infinite loops
+        // If no actions found, return a message action instead of waiting
+        // This encourages the model to analyze and take action rather than defaulting to wait
         if (!actions.Any())
         {
-            actions.Add(new WaitAction
+            actions.Add(new MessageAction
             {
-                Duration = 1,
-                Reasoning = "Analyzing page content..."
+                Message = "I'm analyzing the page content to determine the next step. Please send the updated page state.",
+                Reasoning = "No clear action identified from the response. Requesting updated page state for analysis."
             });
         }
 

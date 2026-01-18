@@ -28,11 +28,11 @@ public class BrowserPlugin
     /// Waits for a specified number of seconds
     /// </summary>
     [KernelFunction]
-    [Description("Waits for a specified number of seconds. Use this when you need to wait for page content to load, animations to complete, or for time-based delays. Keep waits short (1-5 seconds) unless necessary.")]
+    [Description("ONLY use Wait when absolutely necessary - when you explicitly need to wait for dynamic content to load, animations to finish, or time-based delays. DO NOT use Wait as a default action or when analyzing static page content. The page HTML is already provided, so you should analyze it directly and take action. Only wait if you've clicked something that triggers a loading state or animation that requires time to complete. Avoid waiting unnecessarily - it slows down the user experience.")]
     public string Wait(
-        [Description("Number of seconds to wait (typically 1-5 seconds)")]
+        [Description("Number of seconds to wait (ONLY use if absolutely necessary for loading/animations, typically 1-3 seconds maximum)")]
         int seconds,
-        [Description("Brief explanation of why waiting is necessary")]
+        [Description("Detailed explanation of why waiting is absolutely necessary (e.g., 'Waiting for form submission animation to complete' or 'Waiting for dynamic content to load after click')")]
         string reasoning)
     {
         // Function executed - return value is used by Semantic Kernel for function calling flow
