@@ -13,6 +13,11 @@ namespace Web.Common.DTOs.Agent;
 public abstract class BrowserAction
 {
     /// <summary>
+    /// Timestamp when this action was created (UTC)
+    /// </summary>
+    public DateTime Timestamp { get; set; }
+
+    /// <summary>
     /// Reasoning for this action (optional, for debugging/logging)
     /// </summary>
     public string? Reasoning { get; set; }

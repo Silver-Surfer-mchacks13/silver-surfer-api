@@ -34,6 +34,74 @@ public class AgentService
     }
 
     /// <summary>
+    /// Checks if a session exists
+    /// </summary>
+    public async Task<bool> SessionExistsAsync(Guid sessionId, CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.TaskSessions
+            .AnyAsync(s => s.Id == sessionId, cancellationToken);
+    }
+
+    /// <summary>
+    /// Gets all actions for a conversation session
+    /// </summary>
+    public async Task<List<BrowserAction>> GetAllActionsAsync(Guid sessionId, CancellationToken cancellationToken = default)
+    {
+        var actions = new List<BrowserAction>();
+
+        // Fetch click actions
+        var clickActions = await _dbContext.ClickAgentActions
+            .Where(a => a.SessionId == sessionId)
+            .OrderBy(a => a.CreatedAt)
+            .ToListAsync(cancellationToken);
+
+        foreach (var dbAction in clickActions)
+        {
+            actions.Add(new ClickAction
+            {
+                XPath = dbAction.Target, // Target in DB stores XPath
+                Reasoning = dbAction.Reasoning,
+                Timestamp = dbAction.CreatedAt
+            });
+        }
+
+        // Fetch wait actions
+        var waitActions = await _dbContext.WaitAgentActions
+            .Where(a => a.SessionId == sessionId)
+            .OrderBy(a => a.CreatedAt)
+            .ToListAsync(cancellationToken);
+
+        foreach (var dbAction in waitActions)
+        {
+            actions.Add(new WaitAction
+            {
+                Duration = dbAction.Duration,
+                Reasoning = dbAction.Reasoning,
+                Timestamp = dbAction.CreatedAt
+            });
+        }
+
+        // Fetch complete actions
+        var completeActions = await _dbContext.CompleteAgentActions
+            .Where(a => a.SessionId == sessionId)
+            .OrderBy(a => a.CreatedAt)
+            .ToListAsync(cancellationToken);
+
+        foreach (var dbAction in completeActions)
+        {
+            actions.Add(new CompleteAction
+            {
+                Message = dbAction.Message,
+                Reasoning = dbAction.Reasoning,
+                Timestamp = dbAction.CreatedAt
+            });
+        }
+
+        // Sort all actions by timestamp
+        return actions.OrderBy(a => a.Timestamp).ToList();
+    }
+
+    /// <summary>
     /// Processes a conversation request - creates new session if SessionId is null, otherwise continues existing session
     /// </summary>
     public async Task<AgentResponse> ProcessConversationRequestAsync(
@@ -177,6 +245,13 @@ public class AgentService
 
         // Try to extract function calls from Semantic Kernel's response
         var actions = ExtractActionsFromFunctionCalls(responseMessage, pageState);
+
+        // Set timestamp for all actions
+        var timestamp = DateTime.UtcNow;
+        foreach (var action in actions)
+        {
+            action.Timestamp = timestamp;
+        }
 
         // Save actions to database using the appropriate model for each action type
         foreach (var action in actions)

@@ -156,6 +156,17 @@ public class VertexAIChatCompletionService : IChatCompletionService
             {
                 _logger.LogError("Vertex AI API returned error: {StatusCode} - {Response}", 
                     httpResponse.StatusCode, responseContent);
+                
+                // Provide more helpful error message for 404 (model not found)
+                if (httpResponse.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    throw new HttpRequestException(
+                        $"Vertex AI model '{_options.Model}' not found in project '{_options.ProjectId}' at location '{_options.Location}'. " +
+                        $"Please verify the model name is correct and available in your region. " +
+                        $"Common models: gemini-2.0-flash-exp, gemini-2.0-flash, gemini-2.5-flash, gemini-2.5-pro. " +
+                        $"Original error: {responseContent}");
+                }
+                
                 throw new HttpRequestException($"Vertex AI API request failed: {httpResponse.StatusCode} - {responseContent}");
             }
 

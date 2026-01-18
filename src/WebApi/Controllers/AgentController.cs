@@ -47,6 +47,7 @@ public class AgentController : ControllerBase
     ///   <code>
     ///   {
     ///     "action_type": "click",
+    ///     "timestamp": "datetime (UTC, ISO 8601 format)",
     ///     "x_path": "string (XPath expression, required, 1-500 chars)",
     ///     "reasoning": "string (optional)"
     ///   }
@@ -59,6 +60,7 @@ public class AgentController : ControllerBase
     ///   <code>
     ///   {
     ///     "action_type": "wait",
+    ///     "timestamp": "datetime (UTC, ISO 8601 format)",
     ///     "duration": "integer (required, 0-300 seconds)",
     ///     "reasoning": "string (optional)"
     ///   }
@@ -69,6 +71,7 @@ public class AgentController : ControllerBase
     ///   <code>
     ///   {
     ///     "action_type": "message",
+    ///     "timestamp": "datetime (UTC, ISO 8601 format)",
     ///     "message": "string (required, 1-1000 chars)",
     ///     "reasoning": "string (optional)"
     ///   }
@@ -79,6 +82,7 @@ public class AgentController : ControllerBase
     ///   <code>
     ///   {
     ///     "action_type": "complete",
+    ///     "timestamp": "datetime (UTC, ISO 8601 format)",
     ///     "message": "string (required, 1-1000 chars)",
     ///     "reasoning": "string (optional)"
     ///   }
@@ -160,6 +164,56 @@ public class AgentController : ControllerBase
             {
                 Message = "Failed to process conversation",
                 ErrorCode = "CONVERSATION_PROCESSING_FAILED"
+            });
+        }
+    }
+
+    /// <summary>
+    /// Get all actions for a conversation session
+    /// </summary>
+    /// <param name="sessionId">The session ID</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>List of all actions for the session, sorted chronologically</returns>
+    /// <response code="200">Returns all actions for the session</response>
+    /// <response code="404">Session not found</response>
+    /// <response code="500">Internal server error</response>
+    [HttpGet("conversations/{sessionId:guid}/actions")]
+    [ProducesResponseType(typeof(List<BrowserAction>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult<List<BrowserAction>>> GetConversationActions(
+        Guid sessionId,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            // Verify session exists
+            var sessionExists = await _agentService.SessionExistsAsync(sessionId, cancellationToken);
+            if (!sessionExists)
+            {
+                return NotFound(new ErrorResponse
+                {
+                    Message = $"Conversation session {sessionId} not found",
+                    ErrorCode = "SESSION_NOT_FOUND"
+                });
+            }
+
+            var actions = await _agentService.GetAllActionsAsync(sessionId, cancellationToken);
+
+            _logger.LogInformation(
+                "Retrieved {ActionCount} actions for session {SessionId}",
+                actions.Count,
+                sessionId);
+
+            return Ok(actions);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving actions for session {SessionId}", sessionId);
+            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResponse
+            {
+                Message = "Failed to retrieve conversation actions",
+                ErrorCode = "ACTION_RETRIEVAL_FAILED"
             });
         }
     }
