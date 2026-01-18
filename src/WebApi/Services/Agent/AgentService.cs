@@ -250,15 +250,19 @@ public class AgentService
         // This shouldn't happen if the model follows instructions, but handle it gracefully
         if (!actions.Any())
         {
+            var contentPreview = responseMessage.Content != null 
+                ? responseMessage.Content.Substring(0, Math.Min(500, responseMessage.Content.Length))
+                : "(null)";
+            
             _logger.LogWarning(
                 "No actions extracted from model response. Response content: {Content}",
-                responseMessage.Content?.Substring(0, Math.Min(500, responseMessage.Content.Length ?? 0)));
+                contentPreview);
             
             // Return a message action explaining the issue
             actions.Add(new MessageAction
             {
                 Message = "I received your page state but couldn't determine the next action. Please check the model response format.",
-                Reasoning = $"Model response did not contain valid function calls. Response preview: {responseMessage.Content?.Substring(0, Math.Min(200, responseMessage.Content.Length ?? 0))}"
+                Reasoning = $"Model response did not contain valid function calls. Response preview: {contentPreview.Substring(0, Math.Min(200, contentPreview.Length))}"
             });
         }
 
