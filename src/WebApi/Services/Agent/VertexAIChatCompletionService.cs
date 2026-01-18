@@ -124,7 +124,77 @@ public class VertexAIChatCompletionService : IChatCompletionService
                 });
             }
 
-            // Build request payload
+            // Build JSON schema for structured output
+            var responseSchema = new
+            {
+                type = "object",
+                properties = new
+                {
+                    actions = new
+                    {
+                        type = "array",
+                        description = "List of actions to execute",
+                        items = new
+                        {
+                            oneOf = new object[]
+                            {
+                                new
+                                {
+                                    type = "object",
+                                    properties = new
+                                    {
+                                        action_type = new { type = "string", @enum = new[] { "click" } },
+                                        xpath = new { type = "string", description = "XPath expression for the element to click", maxLength = 500 },
+                                        reasoning = new { type = "string", description = "Optional explanation of why this action is being taken" }
+                                    },
+                                    required = new[] { "action_type", "xpath" },
+                                    additionalProperties = false
+                                },
+                                new
+                                {
+                                    type = "object",
+                                    properties = new
+                                    {
+                                        action_type = new { type = "string", @enum = new[] { "wait" } },
+                                        duration = new { type = "integer", description = "Duration in seconds to wait", minimum = 0, maximum = 300 },
+                                        reasoning = new { type = "string", description = "Optional explanation of why waiting is necessary" }
+                                    },
+                                    required = new[] { "action_type", "duration" },
+                                    additionalProperties = false
+                                },
+                                new
+                                {
+                                    type = "object",
+                                    properties = new
+                                    {
+                                        action_type = new { type = "string", @enum = new[] { "message" } },
+                                        message = new { type = "string", description = "Message to display to the user", maxLength = 1000 },
+                                        reasoning = new { type = "string", description = "Optional explanation of why this message is being shown" }
+                                    },
+                                    required = new[] { "action_type", "message" },
+                                    additionalProperties = false
+                                },
+                                new
+                                {
+                                    type = "object",
+                                    properties = new
+                                    {
+                                        action_type = new { type = "string", @enum = new[] { "complete" } },
+                                        message = new { type = "string", description = "Message summarizing what was accomplished", maxLength = 1000 },
+                                        reasoning = new { type = "string", description = "Optional explanation of why the task is complete" }
+                                    },
+                                    required = new[] { "action_type", "message" },
+                                    additionalProperties = false
+                                }
+                            }
+                        }
+                    }
+                },
+                required = new[] { "actions" },
+                additionalProperties = false
+            };
+
+            // Build request payload with structured output
             var requestPayload = new
             {
                 contents = contents,
@@ -133,7 +203,9 @@ public class VertexAIChatCompletionService : IChatCompletionService
                     maxOutputTokens = _options.MaxTokens,
                     temperature = _options.Temperature,
                     topP = 0.95,
-                    topK = 40
+                    topK = 40,
+                    responseMimeType = "application/json",
+                    responseSchema = responseSchema
                 }
             };
 
@@ -141,7 +213,11 @@ public class VertexAIChatCompletionService : IChatCompletionService
             var accessToken = await GetAccessTokenAsync(cancellationToken);
 
             // Create HTTP request
-            var jsonPayload = JsonSerializer.Serialize(requestPayload);
+            var jsonPayload = JsonSerializer.Serialize(requestPayload, new JsonSerializerOptions { WriteIndented = true });
+            
+            // Log the exact request payload for debugging
+            _logger.LogInformation("Sending request to Vertex AI Gemini:\n{RequestPayload}", jsonPayload);
+            
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, _baseUrl)
             {
                 Content = new StringContent(jsonPayload, Encoding.UTF8, "application/json")
@@ -172,12 +248,19 @@ public class VertexAIChatCompletionService : IChatCompletionService
 
             // Parse response
             var responseJson = JsonDocument.Parse(responseContent);
+            
+            // Log the raw response for debugging
+            _logger.LogInformation("Received response from Vertex AI Gemini:\n{ResponseContent}", responseContent);
+            
             var resultText = ExtractTextFromResponse(responseJson.RootElement);
 
             if (string.IsNullOrEmpty(resultText))
             {
+                _logger.LogWarning("No text content extracted from response. Full response: {Response}", responseContent);
                 throw new InvalidOperationException("No text content in Vertex AI response");
             }
+            
+            _logger.LogDebug("Extracted text from response: {Text}", resultText);
 
             // Return as ChatMessageContent
             var chatMessage = new ChatMessageContent(

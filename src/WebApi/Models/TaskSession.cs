@@ -36,4 +36,5 @@ public class TaskSession
     public ICollection<ClickAgentAction> ClickActions { get; set; } = new List<ClickAgentAction>();
     public ICollection<WaitAgentAction> WaitActions { get; set; } = new List<WaitAgentAction>();
     public ICollection<CompleteAgentAction> CompleteActions { get; set; } = new List<CompleteAgentAction>();
+    public ICollection<MessageAgentAction> MessageActions { get; set; } = new List<MessageAgentAction>();
 }

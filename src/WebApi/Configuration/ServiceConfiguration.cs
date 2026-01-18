@@ -413,7 +413,13 @@ public static class ServiceConfiguration
             var chatCompletionService = sp.GetRequiredService<Services.Agent.VertexAIChatCompletionService>();
             kernelBuilder.Services.AddSingleton<IChatCompletionService>(chatCompletionService);
             
-            return kernelBuilder.Build();
+            var kernel = kernelBuilder.Build();
+            
+            // Register BrowserPlugin once at startup (shared across all requests)
+            var browserPlugin = new Services.Agent.BrowserPlugin();
+            kernel.Plugins.AddFromObject(browserPlugin, "BrowserPlugin");
+            
+            return kernel;
         });
     }
     

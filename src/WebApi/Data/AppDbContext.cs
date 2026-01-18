@@ -15,6 +15,7 @@ public class AppDbContext(
     public DbSet<ClickAgentAction> ClickAgentActions { get; set; }
     public DbSet<WaitAgentAction> WaitAgentActions { get; set; }
     public DbSet<CompleteAgentAction> CompleteAgentActions { get; set; }
+    public DbSet<MessageAgentAction> MessageAgentActions { get; set; }
     public DbSet<SitePattern> SitePatterns { get; set; }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -210,6 +211,26 @@ public class AppDbContext(
             
             entity.HasOne(e => e.Session)
                 .WithMany(e => e.CompleteActions)
+                .HasForeignKey(e => e.SessionId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // MessageAgentAction configuration
+        modelBuilder.Entity<MessageAgentAction>(entity =>
+        {
+            entity.ToTable("MessageAgentActions", "silver_surfers_main");
+            entity.HasKey(e => e.Id);
+            entity.HasIndex(e => e.SessionId);
+            entity.HasIndex(e => e.CreatedAt);
+            
+            entity.Property(e => e.Message).IsRequired().HasMaxLength(1000);
+            entity.Property(e => e.Reasoning).IsRequired().HasMaxLength(5000);
+            entity.Property(e => e.PageUrl).IsRequired().HasMaxLength(2000);
+            entity.Property(e => e.PageHtml).HasMaxLength(50000);
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            
+            entity.HasOne(e => e.Session)
+                .WithMany(e => e.MessageActions)
                 .HasForeignKey(e => e.SessionId)
                 .OnDelete(DeleteBehavior.Cascade);
         });

@@ -3,35 +3,25 @@ using System.Diagnostics.CodeAnalysis;
 namespace WebApi.Models;
 
 /// <summary>
-/// Database model for click actions
+/// Database model for message actions
 /// </summary>
 [SuppressMessage("ReSharper", "PropertyCanBeMadeInitOnly.Global")]
 [SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Global")]
-public class ClickAgentAction
+public class MessageAgentAction
 {
     public Guid Id { get; set; }
     
     public Guid SessionId { get; set; }
     
     /// <summary>
-    /// XPath expression for the element to click (e.g., '//button[@id="login"]', '//a[@href="/login"]')
+    /// Message to display to the user
     /// </summary>
-    public required string Target { get; set; }
+    public required string Message { get; set; }
     
     /// <summary>
     /// AI's explanation for why this action was taken
     /// </summary>
     public required string Reasoning { get; set; }
-    
-    /// <summary>
-    /// Whether the action was successful (set by extension after execution)
-    /// </summary>
-    public bool Success { get; set; }
-    
-    /// <summary>
-    /// Error message if action failed (nullable)
-    /// </summary>
-    public string? ErrorMessage { get; set; }
     
     /// <summary>
     /// URL of the page where action was taken

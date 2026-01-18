@@ -37,3 +37,6 @@ terraform.rc
 # Ignore GCP CLI outputs
 tf/gcloud/*.json
 tf/cloudrun/cloud_run
+
+example-gemini-request.json
+example-gemini-response.json

@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Options;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
@@ -59,7 +60,7 @@ public class AgentService
         {
             actions.Add(new ClickAction
             {
-                XPath = dbAction.Target, // Target in DB stores XPath
+                XPath = dbAction.Target, // Target stores XPath expression
                 Reasoning = dbAction.Reasoning,
                 Timestamp = dbAction.CreatedAt
             });
@@ -97,6 +98,22 @@ public class AgentService
             });
         }
 
+        // Fetch message actions
+        var messageActions = await _dbContext.MessageAgentActions
+            .Where(a => a.SessionId == sessionId)
+            .OrderBy(a => a.CreatedAt)
+            .ToListAsync(cancellationToken);
+
+        foreach (var dbAction in messageActions)
+        {
+            actions.Add(new MessageAction
+            {
+                Message = dbAction.Message,
+                Reasoning = dbAction.Reasoning,
+                Timestamp = dbAction.CreatedAt
+            });
+        }
+
         // Sort all actions by timestamp
         return actions.OrderBy(a => a.Timestamp).ToList();
     }
@@ -107,6 +124,43 @@ public class AgentService
     public async Task<AgentResponse> ProcessConversationRequestAsync(
         ConversationRequest request,
         CancellationToken cancellationToken = default)
+    {
+        // Check if database provider supports transactions (in-memory doesn't)
+        var supportsTransactions = _dbContext.Database.IsRelational();
+        
+        if (supportsTransactions)
+        {
+            // Use execution strategy for retry support with transactions
+            var strategy = _dbContext.Database.CreateExecutionStrategy();
+            return await strategy.ExecuteAsync(async () =>
+            {
+                await using var transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
+                try
+                {
+                    var response = await ProcessConversationRequestInternalAsync(request, cancellationToken);
+                    await transaction.CommitAsync(cancellationToken);
+                    return response;
+                }
+                catch
+                {
+                    await transaction.RollbackAsync(cancellationToken);
+                    throw;
+                }
+            });
+        }
+        else
+        {
+            // In-memory database - no transaction support needed
+            return await ProcessConversationRequestInternalAsync(request, cancellationToken);
+        }
+    }
+
+    /// <summary>
+    /// Internal implementation of conversation request processing (without transaction handling)
+    /// </summary>
+    private async Task<AgentResponse> ProcessConversationRequestInternalAsync(
+        ConversationRequest request,
+        CancellationToken cancellationToken)
     {
         TaskSession session;
 
@@ -147,13 +201,13 @@ public class AgentService
             };
 
             _dbContext.TaskSessions.Add(session);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            // Don't save yet - will be saved with actions in ProcessConversationAsync
 
             _logger.LogInformation("Created new conversation session {SessionId} with title: {Title}", 
                 session.Id, request.Title);
         }
 
-        // Process the conversation
+        // Process the conversation (saves session and actions atomically)
         return await ProcessConversationAsync(session, request.PageState, cancellationToken);
     }
 
@@ -176,32 +230,42 @@ public class AgentService
         chatHistory.AddSystemMessage(systemPrompt);
 
         // Add conversation history from previous actions (load from all action tables)
+        // Note: Execute queries sequentially as DbContext is not thread-safe for concurrent operations
         var clickActions = await _dbContext.ClickAgentActions
             .Where(a => a.SessionId == session.Id)
-            .OrderBy(a => a.CreatedAt)
+            .OrderByDescending(a => a.CreatedAt)
             .Take(10)
             .Select(a => new { Type = "click", Description = $"click on {a.Target}", Reasoning = a.Reasoning, CreatedAt = a.CreatedAt })
             .ToListAsync(cancellationToken);
 
         var waitActions = await _dbContext.WaitAgentActions
             .Where(a => a.SessionId == session.Id)
-            .OrderBy(a => a.CreatedAt)
+            .OrderByDescending(a => a.CreatedAt)
             .Take(10)
             .Select(a => new { Type = "wait", Description = $"wait {a.Duration}s", Reasoning = a.Reasoning, CreatedAt = a.CreatedAt })
             .ToListAsync(cancellationToken);
 
         var completeActions = await _dbContext.CompleteAgentActions
             .Where(a => a.SessionId == session.Id)
-            .OrderBy(a => a.CreatedAt)
+            .OrderByDescending(a => a.CreatedAt)
             .Take(10)
             .Select(a => new { Type = "complete", Description = $"complete: {a.Message}", Reasoning = a.Reasoning, CreatedAt = a.CreatedAt })
             .ToListAsync(cancellationToken);
 
+        var messageActions = await _dbContext.MessageAgentActions
+            .Where(a => a.SessionId == session.Id)
+            .OrderByDescending(a => a.CreatedAt)
+            .Take(10)
+            .Select(a => new { Type = "message", Description = $"message: {a.Message}", Reasoning = a.Reasoning, CreatedAt = a.CreatedAt })
+            .ToListAsync(cancellationToken);
+
+        // Merge, sort chronologically (oldest first), and take the most recent 10
         var allPreviousActions = clickActions
             .Concat(waitActions)
             .Concat(completeActions)
+            .Concat(messageActions)
             .OrderBy(a => a.CreatedAt)
-            .Take(10)
+            .TakeLast(10)
             .ToList();
 
         if (allPreviousActions.Any())
@@ -225,9 +289,7 @@ public class AgentService
             chatHistory.AddUserMessage($"User goal: {session.Title}");
         }
 
-        // Add BrowserPlugin to kernel
-        var browserPlugin = new BrowserPlugin();
-        _kernel.Plugins.AddFromObject(browserPlugin, "BrowserPlugin");
+        // BrowserPlugin is already registered at startup in ServiceConfiguration
 
         // Invoke the kernel to get agent response with function calling enabled
         var result = await chatCompletionService.GetChatMessageContentsAsync(
@@ -283,7 +345,7 @@ public class AgentService
                     {
                         Id = Guid.NewGuid(),
                         SessionId = session.Id,
-                        Target = clickAction.XPath, // Stored as Target in DB but represents XPath
+                        Target = clickAction.XPath, // Target stores XPath expression
                         Reasoning = action.Reasoning ?? string.Empty,
                         Success = false,
                         PageUrl = pageState.Url,
@@ -294,8 +356,17 @@ public class AgentService
                     break;
 
                 case MessageAction messageAction:
-                    // MessageAction is informational only - no need to save to database
-                    // It's just for displaying messages to the user
+                    var messageDbAction = new MessageAgentAction
+                    {
+                        Id = Guid.NewGuid(),
+                        SessionId = session.Id,
+                        Message = messageAction.Message,
+                        Reasoning = action.Reasoning ?? string.Empty,
+                        PageUrl = pageState.Url,
+                        PageHtml = TruncateHtml(pageState.Html),
+                        CreatedAt = DateTime.UtcNow
+                    };
+                    _dbContext.MessageAgentActions.Add(messageDbAction);
                     break;
 
                 case WaitAction waitAction:
@@ -338,6 +409,8 @@ public class AgentService
         }
 
         session.UpdatedAt = DateTime.UtcNow;
+        
+        // Save all changes atomically (session update + all actions)
         await _dbContext.SaveChangesAsync(cancellationToken);
 
         return new AgentResponse
@@ -356,18 +429,18 @@ Your goal: {userGoal}
 Current page: {currentUrl}
 Session ID: {sessionId}
 
-You have access to the following browser functions:
-- ClickElement(xpath, reasoning): Click an element on the page using an XPath expression (e.g., '//button[@id=""login""]', '//a[@href=""/login""]')
-- Wait(seconds, reasoning): ONLY use when absolutely necessary - when you need to wait for dynamic content to load after an action, animations to finish, or time-based delays. DO NOT use Wait for analyzing static page content - the HTML is already provided, analyze it directly.
-- Message(message): Display a message to the user (non-terminal - frontend continues sending requests)
-- Complete(message): Mark the task as complete (terminal - frontend stops sending requests)
+You have access to the following action types:
+- click: Click an element on the page using an XPath expression (e.g., '//button[@id=""login""]', '//a[@href=""/login""]')
+- wait: ONLY use when absolutely necessary - when you need to wait for dynamic content to load after an action, animations to finish, or time-based delays. DO NOT use wait for analyzing static page content - the HTML is already provided, analyze it directly.
+- message: Display a message to the user (non-terminal - frontend continues sending requests)
+- complete: Mark the task as complete (terminal - frontend stops sending requests)
 
-CRITICAL: DO NOT use Wait() as a default action. The page HTML is already provided to you - analyze it directly and take action. Only wait if:
+CRITICAL: DO NOT use wait as a default action. The page HTML is already provided to you - analyze it directly and take action. Only wait if:
 1. You've clicked something that triggers a loading state that requires time
 2. You need to wait for an animation to complete before the next action
 3. There's an explicit time-based requirement
 
-IMPORTANT: Use XPath expressions, NOT CSS selectors, for ClickElement. XPath examples:
+IMPORTANT: Use XPath expressions, NOT CSS selectors, for click actions. XPath examples:
 - '//button[@id=""submit""]' - button with id=""submit""
 - '//a[@href=""/login""]' - link with href=""/login""
 - '//input[@type=""text"" and @name=""email""]' - input with type=""text"" and name=""email""
@@ -376,132 +449,160 @@ IMPORTANT: Use XPath expressions, NOT CSS selectors, for ClickElement. XPath exa
 CRITICAL INSTRUCTIONS:
 1. The page HTML content is ALREADY provided to you in the request - you have the full page state
 2. You MUST analyze the HTML directly and take action - do NOT ask for updated page state
-3. You MUST use function calls in your response. Format: ClickElement('//xpath', 'reasoning') or Complete('message')
-4. If you cannot find the element you need, use Message() to explain what you're looking for, but DO NOT ask for updated page state
-5. The page state is current - analyze it and act on it immediately
+3. You MUST respond with valid JSON matching the provided schema
+4. The JSON response must contain an ""actions"" array with one or more action objects
+5. Each action must have an ""action_type"" field set to one of: ""click"", ""wait"", ""message"", or ""complete""
+6. For click actions: include ""xpath"" field with the XPath expression
+7. For wait actions: include ""duration"" field with seconds (0-300)
+8. For message/complete actions: include ""message"" field with the message text
+9. Optionally include ""reasoning"" field to explain why you're taking this action
+10. If you cannot find the element you need, use a message action to explain what you're looking for, but DO NOT ask for updated page state
+11. The page state is current - analyze it and act on it immediately
 
 Analyze the HTML content provided and determine the next action(s) needed to accomplish the user's goal.
-You have the complete page HTML - search through it, find the elements you need, and click them using ClickElement().
-Use Message() only for informational messages or when you need to explain something to the user.
-Use Complete() only when the task is fully finished.
-ALWAYS respond with function calls - never just text descriptions.";
+You have the complete page HTML - search through it, find the elements you need, and click them using click actions.
+Use message actions only for informational messages or when you need to explain something to the user.
+Use complete actions only when the task is fully finished.
+ALWAYS respond with valid JSON - never plain text descriptions.";
     }
 
     /// <summary>
     /// Extracts browser actions from Semantic Kernel's response
-    /// Attempts to extract from function calls first, then falls back to text parsing
+    /// Now uses structured JSON output from Gemini instead of regex parsing
     /// </summary>
     private List<BrowserAction> ExtractActionsFromFunctionCalls(ChatMessageContent responseMessage, PageState pageState)
     {
         var actions = new List<BrowserAction>();
 
-        // Try to extract from Items collection if available (Semantic Kernel function calls)
-        // Note: Vertex AI may not return structured function calls, so we check Items first
-        if (responseMessage.Items != null && responseMessage.Items.Count > 0)
+        if (string.IsNullOrWhiteSpace(responseMessage.Content))
         {
-            // Check metadata or items for function call information
-            // In SK, function calls might be represented differently depending on the provider
-            foreach (var item in responseMessage.Items)
-            {
-                // Try to extract function call info from item metadata or type
-                // This is provider-dependent, so we check generically
-                var itemType = item.GetType().Name;
-                if (itemType.Contains("Function") || itemType.Contains("Call"))
-                {
-                    // Attempt to extract function name and arguments via reflection or metadata
-                    // For now, we'll fall through to text parsing since Vertex AI structure is unknown
-                }
-            }
-        }
-
-        // Primary method: Parse from text content
-        // This works reliably with Vertex AI responses and handles both function call formats and natural language
-        actions = ParseActionsFromText(responseMessage.Content ?? "", pageState);
-
-        return actions;
-    }
-
-    /// <summary>
-    /// Fallback: Parse actions from text response (used when function calling isn't available)
-    /// </summary>
-    private List<BrowserAction> ParseActionsFromText(string responseContent, PageState pageState)
-    {
-        var actions = new List<BrowserAction>();
-
-        // Parse Complete action (terminal - return immediately if found)
-        // Only match function call syntax: Complete(...) or complete(...), not just the word "complete" in text
-        // Use word boundary to avoid matching "complete" in phrases like "complete checkout"
-        var completeMatch = System.Text.RegularExpressions.Regex.Match(
-            responseContent,
-            @"\b(?:Complete|complete)\s*\(\s*['""]?([^'""\)]+)['""]?\s*\)",
-            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-
-        if (completeMatch.Success)
-        {
-            actions.Add(new CompleteAction
-            {
-                Message = completeMatch.Groups[1].Value.Trim(),
-                Reasoning = responseContent.Substring(0, Math.Min(200, responseContent.Length))
-            });
-            return actions; // Complete is terminal
-        }
-
-        // Parse Click action - look for ClickElement(...) function call
-        // Handle formats: ClickElement('//xpath', 'reasoning') or ClickElement(xpath='//xpath', reasoning='...')
-        var clickMatch = System.Text.RegularExpressions.Regex.Match(
-            responseContent,
-            @"\b(?:ClickElement|click)\s*\(\s*(?:(?:xpath|selector)\s*=\s*)?['""]([^'""]+)['""]\s*(?:,\s*(?:reasoning\s*=\s*)?['""]([^'""]+)['""])?\s*\)",
-            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-
-        if (clickMatch.Success)
-        {
-            actions.Add(new ClickAction
-            {
-                XPath = clickMatch.Groups[1].Value,
-                Reasoning = clickMatch.Groups.Count > 2 && !string.IsNullOrEmpty(clickMatch.Groups[2].Value)
-                    ? clickMatch.Groups[2].Value
-                    : responseContent.Substring(0, Math.Min(200, responseContent.Length))
-            });
-        }
-
-        // Parse Message action - look for Message(...) function call
-        var messageMatch = System.Text.RegularExpressions.Regex.Match(
-            responseContent,
-            @"\b(?:Message|message)\s*\(\s*['""]?([^'""\)]+)['""]?\s*\)",
-            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-
-        if (messageMatch.Success)
-        {
+            _logger.LogWarning("Response message content is empty");
             actions.Add(new MessageAction
             {
-                Message = messageMatch.Groups[1].Value.Trim(),
-                Reasoning = responseContent.Substring(0, Math.Min(200, responseContent.Length))
+                Message = "I received an empty response from the model. The model should return valid JSON with an actions array.",
+                Reasoning = "Response content was null or empty"
             });
+            return actions;
         }
 
-        // Parse Wait action - look for Wait(...) function call
-        var waitMatch = System.Text.RegularExpressions.Regex.Match(
-            responseContent,
-            @"\b(?:Wait|wait)\s*\(\s*(\d+)\s*(?:,\s*['""]([^'""]+)['""])?\s*\)",
-            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-
-        if (waitMatch.Success && int.TryParse(waitMatch.Groups[1].Value, out var seconds))
+        try
         {
-            actions.Add(new WaitAction
+            // Parse the structured JSON response from Gemini
+            // Deserialize to JsonElement first, then manually convert based on action_type
+            var jsonDoc = JsonDocument.Parse(responseMessage.Content);
+            var root = jsonDoc.RootElement;
+
+            if (!root.TryGetProperty("actions", out var actionsElement) || actionsElement.ValueKind != JsonValueKind.Array)
             {
-                Duration = seconds,
-                Reasoning = waitMatch.Groups.Count > 2 && !string.IsNullOrEmpty(waitMatch.Groups[2].Value)
-                    ? waitMatch.Groups[2].Value
-                    : "Waiting as requested"
+                _logger.LogWarning("Structured response missing or invalid actions array. Response content: {Content}", 
+                    responseMessage.Content.Substring(0, Math.Min(500, responseMessage.Content.Length)));
+                
+                actions.Add(new MessageAction
+                {
+                    Message = "I received a response but it contained no actions. The model should return at least one action in the actions array.",
+                    Reasoning = "Structured response was valid JSON but missing actions array"
+                });
+                return actions;
+            }
+
+            // Convert each action based on action_type
+            foreach (var actionElement in actionsElement.EnumerateArray())
+            {
+                if (!actionElement.TryGetProperty("action_type", out var actionTypeElement))
+                {
+                    _logger.LogWarning("Action missing action_type field, skipping");
+                    continue;
+                }
+
+                var actionType = actionTypeElement.GetString();
+                var reasoning = actionElement.TryGetProperty("reasoning", out var reasoningElement) 
+                    ? reasoningElement.GetString() 
+                    : null;
+
+                BrowserAction? action = actionType switch
+                {
+                    "click" => actionElement.TryGetProperty("xpath", out var xpathElement)
+                        ? new ClickAction
+                        {
+                            XPath = xpathElement.GetString() ?? string.Empty,
+                            Reasoning = reasoning
+                        }
+                        : null,
+                    
+                    "wait" => actionElement.TryGetProperty("duration", out var durationElement) && durationElement.TryGetInt32(out var duration)
+                        ? new WaitAction
+                        {
+                            Duration = duration,
+                            Reasoning = reasoning
+                        }
+                        : null,
+                    
+                    "message" => actionElement.TryGetProperty("message", out var messageElement)
+                        ? new MessageAction
+                        {
+                            Message = messageElement.GetString() ?? string.Empty,
+                            Reasoning = reasoning
+                        }
+                        : null,
+                    
+                    "complete" => actionElement.TryGetProperty("message", out var completeMessageElement)
+                        ? new CompleteAction
+                        {
+                            Message = completeMessageElement.GetString() ?? string.Empty,
+                            Reasoning = reasoning
+                        }
+                        : null,
+                    
+                    _ => null
+                };
+
+                if (action != null)
+                {
+                    actions.Add(action);
+                }
+                else
+                {
+                    _logger.LogWarning("Unknown or invalid action type: {ActionType}", actionType);
+                }
+            }
+
+            if (!actions.Any())
+            {
+                _logger.LogWarning("No valid actions extracted from response");
+                actions.Add(new MessageAction
+                {
+                    Message = "I received a response but couldn't extract any valid actions from it.",
+                    Reasoning = "All actions in the response were invalid or missing required fields"
+                });
+            }
+            else
+            {
+                _logger.LogDebug("Extracted {Count} actions from structured JSON response", actions.Count);
+            }
+        }
+        catch (JsonException ex)
+        {
+            _logger.LogError(ex, "Failed to parse structured JSON response. Content: {Content}", 
+                responseMessage.Content.Substring(0, Math.Min(1000, responseMessage.Content.Length)));
+            
+            actions.Add(new MessageAction
+            {
+                Message = "I received a response but couldn't parse it correctly. The model should return valid JSON matching the expected schema.",
+                Reasoning = $"JSON parsing error: {ex.Message}"
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unexpected error parsing structured response");
+            actions.Add(new MessageAction
+            {
+                Message = "An error occurred while processing the response.",
+                Reasoning = $"Unexpected error: {ex.Message}"
             });
         }
 
-        // If no actions found, this means the model didn't provide a valid function call
-        // Return empty list - the calling code should handle this appropriately
-        // The page state is already provided, so the model should be analyzing and acting on it
         return actions;
     }
-
 
     private string TruncateHtml(string html)
     {

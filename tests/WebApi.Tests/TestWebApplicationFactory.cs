@@ -43,7 +43,7 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
                 ["Gemini:ProjectId"] = "test-project",
                 ["Gemini:Location"] = "us-central1",
                 ["Gemini:Model"] = "gemini-2.0-flash",
-                ["Gemini:MaxTokens"] = "8192",
+                ["Gemini:MaxTokens"] = "65536",
                 ["Gemini:Temperature"] = "0.7"
             });
         });

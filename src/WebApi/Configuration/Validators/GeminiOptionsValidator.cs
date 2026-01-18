@@ -23,7 +23,7 @@ public class GeminiOptionsValidator : AbstractValidator<GeminiOptions>
 
         RuleFor(x => x.MaxTokens)
             .GreaterThanOrEqualTo(1).WithMessage("MaxTokens must be at least 1")
-            .LessThanOrEqualTo(8192).WithMessage("MaxTokens should not exceed 8192");
+            .LessThanOrEqualTo(65536).WithMessage("MaxTokens should not exceed 65536");
 
         RuleFor(x => x.Temperature)
             .GreaterThanOrEqualTo(0f).WithMessage("Temperature must be at least 0")
