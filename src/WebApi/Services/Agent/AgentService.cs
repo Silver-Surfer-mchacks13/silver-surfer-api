@@ -246,6 +246,22 @@ public class AgentService
         // Try to extract function calls from Semantic Kernel's response
         var actions = ExtractActionsFromFunctionCalls(responseMessage, pageState);
 
+        // If no actions were extracted, the model didn't provide valid function calls
+        // This shouldn't happen if the model follows instructions, but handle it gracefully
+        if (!actions.Any())
+        {
+            _logger.LogWarning(
+                "No actions extracted from model response. Response content: {Content}",
+                responseMessage.Content?.Substring(0, Math.Min(500, responseMessage.Content.Length ?? 0)));
+            
+            // Return a message action explaining the issue
+            actions.Add(new MessageAction
+            {
+                Message = "I received your page state but couldn't determine the next action. Please check the model response format.",
+                Reasoning = $"Model response did not contain valid function calls. Response preview: {responseMessage.Content?.Substring(0, Math.Min(200, responseMessage.Content.Length ?? 0))}"
+            });
+        }
+
         // Set timestamp for all actions
         var timestamp = DateTime.UtcNow;
         foreach (var action in actions)
@@ -353,9 +369,18 @@ IMPORTANT: Use XPath expressions, NOT CSS selectors, for ClickElement. XPath exa
 - '//input[@type=""text"" and @name=""email""]' - input with type=""text"" and name=""email""
 - '//div[@class=""button"" and contains(text(), ""Click me"")]' - div with class=""button"" containing text ""Click me""
 
+CRITICAL INSTRUCTIONS:
+1. The page HTML content is ALREADY provided to you in the request - you have the full page state
+2. You MUST analyze the HTML directly and take action - do NOT ask for updated page state
+3. You MUST use function calls in your response. Format: ClickElement('//xpath', 'reasoning') or Complete('message')
+4. If you cannot find the element you need, use Message() to explain what you're looking for, but DO NOT ask for updated page state
+5. The page state is current - analyze it and act on it immediately
+
 Analyze the HTML content provided and determine the next action(s) needed to accomplish the user's goal.
-The HTML is already loaded - analyze it directly and take action. Do not wait unnecessarily.
-Use Message() for informational messages that don't stop the conversation. Use Complete() only when the task is fully finished.";
+You have the complete page HTML - search through it, find the elements you need, and click them using ClickElement().
+Use Message() only for informational messages or when you need to explain something to the user.
+Use Complete() only when the task is fully finished.
+ALWAYS respond with function calls - never just text descriptions.";
     }
 
     /// <summary>
@@ -467,17 +492,9 @@ Use Message() for informational messages that don't stop the conversation. Use C
             });
         }
 
-        // If no actions found, return a message action instead of waiting
-        // This encourages the model to analyze and take action rather than defaulting to wait
-        if (!actions.Any())
-        {
-            actions.Add(new MessageAction
-            {
-                Message = "I'm analyzing the page content to determine the next step. Please send the updated page state.",
-                Reasoning = "No clear action identified from the response. Requesting updated page state for analysis."
-            });
-        }
-
+        // If no actions found, this means the model didn't provide a valid function call
+        // Return empty list - the calling code should handle this appropriately
+        // The page state is already provided, so the model should be analyzing and acting on it
         return actions;
     }
 
